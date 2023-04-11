@@ -1,10 +1,5 @@
-import { useState } from "react";
-
-import EmployeeField from "./allocateForm/EmployeeField";
-import ProjectField from "./allocateForm/ProjectField";
-import RoleField from "./allocateForm/RoleField";
-import WeekField from "./allocateForm/WeekField";
-import AllocationField from "./allocateForm/AllocationField";
+import React, { useState } from "react";
+import Select from "react-select";
 
 const employeeOptions = [
     { value: 1, label: "John Smith" },
@@ -63,7 +58,7 @@ const ButtonGroup = () => {
             {buttons.map(({ label, icon, target }) => (
                 <a
                     key={label}
-                    className="btn btn-primary"
+                    className="btn btn-outline-primary"
                     data-bs-toggle="collapse"
                     href={`#${target}`}
                     role="button"
@@ -78,33 +73,24 @@ const ButtonGroup = () => {
 };
 
 function Main() {
-    const [selectedEmployees, setSelectedEmployees] = useState([]);
-    const [selectedProject, setSelectedProject] = useState([]);
-    const [selectedRole, setSelectedRole] = useState([]);
-    const [selectedWeek, setSelectedWeek] = useState([]);
-
-    const handleEmployeeChange = (event) => {
-        setSelectedEmployees(
-            Array.from(event.target.selectedOptions, (option) => option.value)
-        );
+    const handleChangeEmployee = (selectedOption) => {
+        console.log(selectedOption);
     };
 
-    const handleProjectChange = (event) => {
-        setSelectedProject(
-            Array.from(event.target.selectedOptions, (option) => option.value)
-        );
+    const handleChangeProject = (selectedOption) => {
+        console.log(selectedOption);
     };
 
-    const handleRoleChange = (event) => {
-        setSelectedRole(
-            Array.from(event.target.selectedOptions, (option) => option.value)
-        );
+    const handleChangeRole = (selectedOption) => {
+        console.log(selectedOption);
     };
 
-    const handleWeekChange = (event) => {
-        setSelectedWeek(
-            Array.from(event.target.selectedOptions, (option) => option.value)
-        );
+    const handleChangeWeek = (selectedOption) => {
+        console.log(selectedOption);
+    };
+
+    const handleFormSubmit = (event) => {
+        //Handle Submission
     };
 
     return (
@@ -122,40 +108,102 @@ function Main() {
             </div>
             <div className="row">
                 <div className="col">
-                    <ButtonGroup></ButtonGroup>
+                    <div className="btn-group">
+                        <ButtonGroup></ButtonGroup>
+                    </div>
 
                     <div className="collapse" id="collapseExample">
                         <div className="card card-body mt-3 pt-3">
-                            <form onsubmit="addSchedule(event)">
-                                <EmployeeField
-                                    label="Employee(s)"
-                                    options={employeeOptions}
-                                    value={selectedEmployees}
-                                    onChange={handleEmployeeChange}
-                                ></EmployeeField>
+                            <form onSubmit={handleFormSubmit}>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="inputText"
+                                        className="col-sm-4 col-form-label"
+                                    >
+                                        Employee(s)
+                                    </label>
+                                    <div className="col-sm-8">
+                                        <Select
+                                            options={employeeOptions}
+                                            onChange={handleChangeEmployee}
+                                            isMulti
+                                            isSearchable
+                                        ></Select>
+                                    </div>
+                                </div>
 
-                                <ProjectField
-                                    label="Project"
-                                    options={projectOptions}
-                                    value={selectedProject}
-                                    onChange={handleProjectChange}
-                                ></ProjectField>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="inputText"
+                                        className="col-sm-4 col-form-label"
+                                    >
+                                        Project
+                                    </label>
+                                    <div className="col-sm-8">
+                                        <Select
+                                            options={projectOptions}
+                                            onChange={handleChangeProject}
+                                        ></Select>
+                                    </div>
+                                </div>
 
-                                <RoleField
-                                    label="Role"
-                                    options={RoleOptions}
-                                    value={selectedRole}
-                                    onChange={handleRoleChange}
-                                ></RoleField>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="inputText"
+                                        className="col-sm-4 col-form-label"
+                                    >
+                                        Project Role
+                                    </label>
+                                    <div className="col-sm-8">
+                                        <Select
+                                            options={RoleOptions}
+                                            onChange={handleChangeRole}
+                                        ></Select>
+                                    </div>
+                                </div>
 
-                                <WeekField
-                                    label="Week"
-                                    options={WeekOptions}
-                                    value={selectedWeek}
-                                    onChange={handleWeekChange}
-                                ></WeekField>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="inputText"
+                                        className="col-sm-4 col-form-label"
+                                    >
+                                        Week
+                                    </label>
+                                    <div className="col-sm-8">
+                                        <Select
+                                            options={WeekOptions}
+                                            onChange={handleChangeWeek}
+                                            isMulti
+                                        ></Select>
+                                    </div>
+                                </div>
 
-                                <AllocationField></AllocationField>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="inputText"
+                                        className="col-sm-4 col-form-label"
+                                    >
+                                        Allocation
+                                    </label>
+                                    <div className="col-sm-8">
+                                        <input
+                                            type="number"
+                                            min={5}
+                                            max={80}
+                                            className="form-control"
+                                            list="datalistOptions"
+                                            id="exampleDataList"
+                                            placeholder="Enter or Select..."
+                                        />
+                                        <datalist id="datalistOptions">
+                                            <option value={10} />
+                                            <option value={20} />
+                                            <option value={40} />
+                                            <option value={60} />
+                                            <option value={80} />
+                                        </datalist>
+                                    </div>
+                                </div>
 
                                 {/* <div className="row mb-3">
                                     <label
@@ -196,6 +244,7 @@ function Main() {
                                         </div>
                                     </div>
                                 </div> */}
+
                                 <div className="row mb-3">
                                     <span className="col-sm-4 col-form-label"></span>
                                     <div className="col-sm-auto">
@@ -204,7 +253,7 @@ function Main() {
                                             className="btn btn-primary"
                                             id="submitbutton"
                                         >
-                                            Submit
+                                            Allocate
                                         </button>
                                     </div>
                                 </div>
