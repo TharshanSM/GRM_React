@@ -2,6 +2,95 @@
 import Select from "react-select";
 import AllocationTable from "./OverviewAllocation/AllocationTable";
 
+const allocationOptions = [
+    {
+        value: 1,
+        employee: "John Smith",
+        project: "Singer Sri Lanka",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 20,
+    },
+    {
+        value: 2,
+        employee: "John Smith",
+        project: "Woerly",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 60,
+    },
+    {
+        value: 3,
+        employee: "John Smith",
+        project: "VBG",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 10,
+    },
+    {
+        value: 4,
+        employee: "John Smith",
+        project: "Singer Sri Lanka",
+        role: "Developer",
+        week: "Week 10 | Mar 06 - Mar 10",
+        allocation: 40,
+    },
+    {
+        value: 5,
+        employee: "John Smith",
+        project: "Woerly",
+        role: "Developer",
+        week: "Week 10 | Mar 06 - Mar 10",
+        allocation: 20,
+    },
+    {
+        value: 6,
+        employee: "John Smith",
+        project: "VBG",
+        role: "Developer",
+        week: "Week 10 | Mar 06 - Mar 10",
+        allocation: 20,
+    },
+    {
+        value: 4,
+        employee: "Donald OConnell",
+        project: "Singer Sri Lanka",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 10,
+    },
+    {
+        value: 5,
+        employee: "Donald OConnell",
+        project: "Woerly",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 40,
+    },
+    {
+        value: 6,
+        employee: "Donald OConnell",
+        project: "VBG",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 10,
+    },
+];
+
+const groupDataByEmployee = (data) => {
+    const groupedData = {};
+    data.forEach((item) => {
+        if (!groupedData[item.employee]) {
+            groupedData[item.employee] = [];
+        }
+        groupedData[item.employee].push(item);
+    });
+    return groupedData;
+};
+
+const groupedData = groupDataByEmployee(allocationOptions);
+console.log(groupedData);
+
 const employeeOptions = [
     { value: 1, label: "John Smith" },
     { value: 2, label: "Donald OConnell" },
@@ -278,11 +367,16 @@ function Main() {
                     </div>
 
                     {/* Overview Schedule  */}
+
                     <div className="collapse" id="collapseExample1">
                         <div className="d-flex">
                             <div className="pt-3">
                                 <Select
-                                    placeholder="Filter by Month..."
+                                    placeholder={
+                                        <span class="bi bi-calendar2-check">
+                                            {"  "}Filter by Month...
+                                        </span>
+                                    }
                                     options={monthOptions}
                                     isMulti
                                 ></Select>
@@ -290,13 +384,19 @@ function Main() {
 
                             <div className="pt-3 ps-1">
                                 <Select
-                                    placeholder="Filter by Employee..."
+                                    placeholder={
+                                        <span class="bi bi-person-check">
+                                            {"  "}Filter by Employee...
+                                        </span>
+                                    }
                                     options={employeeOptions}
                                     isMulti
                                 ></Select>
                             </div>
                         </div>
-                        <AllocationTable></AllocationTable>
+                        <AllocationTable
+                            options={allocationOptions}
+                        ></AllocationTable>
                     </div>
 
                     {/* Employee Overview */}
