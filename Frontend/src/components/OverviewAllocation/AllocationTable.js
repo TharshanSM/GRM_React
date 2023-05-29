@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 function AllocationTable({ options }) {
     const groupData = (data) => {
         const groupedData = {};
@@ -15,7 +13,7 @@ function AllocationTable({ options }) {
     const groupedData = groupData(options);
 
     return (
-        <Fragment>
+        <>
             {Object.keys(groupedData).map((employee) => (
                 <div className="card card-body mt-3 pt-3 col">
                     <h5 className="card-title text-center fs-4">{employee}</h5>
@@ -95,7 +93,7 @@ function AllocationTable({ options }) {
                     </table>
                 </div>
             ))}
-        </Fragment>
+        </>
     );
 }
 

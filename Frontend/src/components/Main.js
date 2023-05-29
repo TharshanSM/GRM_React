@@ -410,10 +410,9 @@ function Main() {
                                 <div className="card mb-4">
                                     <div className="card-body text-center mt-4">
                                         <img
-                                            src="assets/img/profile-img.jpg "
+                                            src="profile-img.jpg"
                                             alt="avatar"
-                                            className="rounded-circle img-fluid"
-                                            style={{ width: 150 }}
+                                            className="rounded-circle"
                                         />
                                         <h5 className="my-3">John Smith</h5>
                                         <p className="text-muted mb-1">
