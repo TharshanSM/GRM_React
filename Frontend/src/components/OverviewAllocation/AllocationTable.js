@@ -1,4 +1,5 @@
 function AllocationTable({ options }) {
+    // Grouping Allocation Data By Given Input
     const groupData = (data) => {
         const groupedData = {};
         data.forEach((item) => {
@@ -21,6 +22,7 @@ function AllocationTable({ options }) {
                         <thead>
                             <tr>
                                 <th scope="col">Projects</th>
+                                <th scope="col">Roles</th>
                                 <th scope="col">W-01</th>
                                 <th scope="col">W-02</th>
                                 <th scope="col">W-03</th>
@@ -30,8 +32,9 @@ function AllocationTable({ options }) {
                         </thead>
                         <tbody>
                             {groupedData[employee].map((item) => (
-                                <tr key={item.project}>
+                                <tr>
                                     <th scope="row">{item.project}</th>
+                                    <th scope="row">{item.role}</th>
                                     <td>{item.allocation}</td>
                                     <td>{item.allocation}</td>
                                     <td>{item.allocation}</td>
@@ -43,6 +46,9 @@ function AllocationTable({ options }) {
                                 <th scope="row" className="text-muted">
                                     Total Allocations
                                 </th>
+                                <td>
+                                    <span className="badge bg-success"></span>
+                                </td>
                                 <td>
                                     <span className="badge bg-success">80</span>
                                 </td>
@@ -63,6 +69,9 @@ function AllocationTable({ options }) {
                                 <th scope="row" className="text-muted">
                                     Availble Allocations
                                 </th>
+                                <td>
+                                    <span className="badge bg-success"></span>
+                                </td>
                                 <td>
                                     <span className="badge bg-warning text-dark">
                                         20
