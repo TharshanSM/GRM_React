@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const sql = require("mssql");
+const oracledb = require("oracledb");
 const dbconfig = require("../dbconfig");
 
 // Get All EMployee
@@ -33,5 +34,7 @@ router.post("/add", async (req, res) => {
         });
     }
 });
+
+// Get Employee Details on Oracle
 
 module.exports = router;

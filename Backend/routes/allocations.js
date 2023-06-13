@@ -5,7 +5,7 @@ const dbconfig = require("../dbconfig");
 // Get All The Allocations Details
 router.get("/get", async (req, res) => {
     const query = ` 
-    SELECT   emp.id               'employee_id',
+    SELECT  emp.id                'employee_id',
             week.id               'week_number',
             week.description      'week_desc',
             emp.first_name        'first_name',
