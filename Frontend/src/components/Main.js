@@ -1,4 +1,4 @@
-//import React, { useState } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import AllocationTable from "./OverviewAllocation/AllocationTable";
 
@@ -178,24 +178,40 @@ const ButtonGroup = () => {
 };
 
 function Main() {
+    const [employees, setEmployees] = useState([]);
+    const [project, setProject] = useState(null);
+    const [role, setRole] = useState(null);
+    const [weeks, setWeeks] = useState([]);
+    const [allocation, setAllocation] = useState("");
+
     const handleChangeEmployee = (selectedOption) => {
-        console.log(selectedOption);
+        setEmployees(selectedOption);
     };
 
     const handleChangeProject = (selectedOption) => {
-        console.log(selectedOption);
+        setProject(selectedOption);
     };
 
     const handleChangeRole = (selectedOption) => {
-        console.log(selectedOption);
+        setRole(selectedOption);
     };
 
     const handleChangeWeek = (selectedOption) => {
-        console.log(selectedOption);
+        setWeeks(selectedOption);
+    };
+
+    const handleChangeAllocation = (event) => {
+        setAllocation(event.target.value);
     };
 
     const handleFormSubmit = (event) => {
-        //Handle Submission
+        event.preventDefault();
+
+        console.log("Employees:", employees);
+        console.log("Project:", project);
+        console.log("Role:", role);
+        console.log("Weeks:", weeks);
+        console.log("Allocation:", allocation);
     };
 
     return (
@@ -299,6 +315,8 @@ function Main() {
                                             list="datalistOptions"
                                             id="exampleDataList"
                                             placeholder="Enter or Select..."
+                                            value={allocation}
+                                            onChange={handleChangeAllocation}
                                         />
                                         <datalist id="datalistOptions">
                                             <option value={10} />
@@ -467,33 +485,23 @@ function Main() {
                                                                         </th>
                                                                         <th scope="col">
                                                                             Week
-                                                                            01 -
-                                                                            Jan
+                                                                            01
+                                                                        </th>
+                                                                        <th scope="col">
+                                                                            Week
                                                                             02
                                                                         </th>
                                                                         <th scope="col">
                                                                             Week
-                                                                            02 -
-                                                                            Jan
-                                                                            09
+                                                                            03
                                                                         </th>
                                                                         <th scope="col">
                                                                             Week
-                                                                            03 -
-                                                                            Jan
-                                                                            16
+                                                                            03
                                                                         </th>
                                                                         <th scope="col">
                                                                             Week
-                                                                            03 -
-                                                                            Jan
-                                                                            23
-                                                                        </th>
-                                                                        <th scope="col">
-                                                                            Week
-                                                                            03 -
-                                                                            Jan
-                                                                            30
+                                                                            03
                                                                         </th>
                                                                     </tr>
                                                                 </thead>
