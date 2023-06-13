@@ -1,5 +1,95 @@
 //import React, { useState } from "react";
 import Select from "react-select";
+import AllocationTable from "./OverviewAllocation/AllocationTable";
+
+const allocationOptions = [
+    {
+        value: 1,
+        employee: "John Smith",
+        project: "Singer Sri Lanka",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 20,
+    },
+    {
+        value: 2,
+        employee: "John Smith",
+        project: "Woerly",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 60,
+    },
+    {
+        value: 3,
+        employee: "John Smith",
+        project: "VBG",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 10,
+    },
+    {
+        value: 4,
+        employee: "John Smith",
+        project: "Singer Sri Lanka",
+        role: "Developer",
+        week: "Week 10 | Mar 06 - Mar 10",
+        allocation: 40,
+    },
+    {
+        value: 5,
+        employee: "John Smith",
+        project: "Woerly",
+        role: "Developer",
+        week: "Week 10 | Mar 06 - Mar 10",
+        allocation: 20,
+    },
+    {
+        value: 6,
+        employee: "John Smith",
+        project: "VBG",
+        role: "Developer",
+        week: "Week 10 | Mar 06 - Mar 10",
+        allocation: 20,
+    },
+    {
+        value: 4,
+        employee: "Donald OConnell",
+        project: "Singer Sri Lanka",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 10,
+    },
+    {
+        value: 5,
+        employee: "Donald OConnell",
+        project: "Woerly",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 40,
+    },
+    {
+        value: 6,
+        employee: "Donald OConnell",
+        project: "VBG",
+        role: "Developer",
+        week: "Week 09 | Feb 27 - Mar 03",
+        allocation: 10,
+    },
+];
+
+const groupDataByEmployee = (data) => {
+    const groupedData = {};
+    data.forEach((item) => {
+        if (!groupedData[item.employee]) {
+            groupedData[item.employee] = [];
+        }
+        groupedData[item.employee].push(item);
+    });
+    return groupedData;
+};
+
+const groupedData = groupDataByEmployee(allocationOptions);
+console.log(groupedData);
 
 const employeeOptions = [
     { value: 1, label: "John Smith" },
@@ -20,18 +110,33 @@ const projectOptions = [
     { value: 3, label: "VBG" },
 ];
 
-const RoleOptions = [
+const roleOptions = [
     { value: 1, label: "Consultant" },
     { value: 2, label: "Project Manager" },
     { value: 3, label: "Developer" },
 ];
 
-const WeekOptions = [
+const weekOptions = [
     { value: 1, label: "Week 09 | Feb 27 - Mar 03" },
     { value: 2, label: "Week 10 | Mar 06 - Mar 10" },
     { value: 3, label: "Week 11 | Mar 13 - Mar 17" },
     { value: 4, label: "Week 12 | Mar 20 - Mar 24" },
     { value: 5, label: "Week 13 | Mar 27 - Mar 31" },
+];
+
+const monthOptions = [
+    { value: 1, label: "January" },
+    { value: 2, label: "February" },
+    { value: 3, label: "March" },
+    { value: 4, label: "April" },
+    { value: 5, label: "May" },
+    { value: 6, label: "June" },
+    { value: 7, label: "July" },
+    { value: 8, label: "August" },
+    { value: 9, label: "September" },
+    { value: 10, label: "October" },
+    { value: 11, label: "November" },
+    { value: 12, label: "December" },
 ];
 
 const buttons = [
@@ -156,7 +261,7 @@ function Main() {
                                     </label>
                                     <div className="col-sm-8">
                                         <Select
-                                            options={RoleOptions}
+                                            options={roleOptions}
                                             onChange={handleChangeRole}
                                         ></Select>
                                     </div>
@@ -171,7 +276,7 @@ function Main() {
                                     </label>
                                     <div className="col-sm-8">
                                         <Select
-                                            options={WeekOptions}
+                                            options={weekOptions}
                                             onChange={handleChangeWeek}
                                             isMulti
                                         ></Select>
@@ -262,271 +367,52 @@ function Main() {
                     </div>
 
                     {/* Overview Schedule  */}
+
                     <div className="collapse" id="collapseExample1">
-                        {/* Select Month Dropdown */}
                         <div className="d-flex">
                             <div className="pt-3">
-                                <div className="dropdown">
-                                    <button
-                                        className="btn btn-primary dropdown-toggle"
-                                        type="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        <span className="bi bi-calendar2-check" />
-                                        Select Month
-                                    </button>
-                                    <ul className="dropdown-menu">
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                January
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                February
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                March
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                April
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <Select
+                                    placeholder={
+                                        <span class="bi bi-calendar2-check">
+                                            {"  "}Filter by Month...
+                                        </span>
+                                    }
+                                    options={monthOptions}
+                                    isMulti
+                                ></Select>
                             </div>
-                            {/* Select Month Dropdown End */}
-                            {/* Select Employee Dropdown */}
+
                             <div className="pt-3 ps-1">
-                                <div className="dropdown">
-                                    <button
-                                        className="btn btn-primary dropdown-toggle"
-                                        type="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        <span className="bi bi-person-check" />
-                                        Select Employee
-                                    </button>
-                                    <ul className="dropdown-menu">
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                John Smith
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                John Smith
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                John Smith
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="dropdown-item"
-                                                href="http://localhost:3000/index.html"
-                                            >
-                                                John Smith
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <Select
+                                    placeholder={
+                                        <span class="bi bi-person-check">
+                                            {"  "}Filter by Employee...
+                                        </span>
+                                    }
+                                    options={employeeOptions}
+                                    isMulti
+                                ></Select>
                             </div>
-                            {/* Select Employee End Dropdown */}
                         </div>
-                        {/* Employee Data 01 */}
-                        <div className="card card-body mt-3 pt-3 col">
-                            <h5 className="card-title text-center fs-4">
-                                John Smith
-                            </h5>
-                            <table className="table caption-top">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Projects</th>
-                                        <th scope="col">W - 01</th>
-                                        <th scope="col">W - 02</th>
-                                        <th scope="col">W - 03</th>
-                                        <th scope="col">W - 04</th>
-                                        <th scope="col">W - 05</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Singer Srilanka</th>
-                                        <td>40</td>
-                                        <td>40</td>
-                                        <td>40</td>
-                                        <td>60</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Woerly</th>
-                                        <td>40</td>
-                                        <td>40</td>
-                                        <td>40</td>
-                                        <td>60</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">VBG</th>
-                                        <td>40</td>
-                                        <td>40</td>
-                                        <td>40</td>
-                                        <td>60</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" className="text-muted">
-                                            Total Allocations
-                                        </th>
-                                        <td>
-                                            <span className="badge bg-success">
-                                                80
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-success">
-                                                80
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-success">
-                                                80
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-success">
-                                                80
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-success">
-                                                80
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" className="text-muted">
-                                            Availble Allocations
-                                        </th>
-                                        <td>
-                                            <span className="badge bg-warning text-dark">
-                                                20
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-warning text-dark">
-                                                20
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-warning text-dark">
-                                                20
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-warning text-dark">
-                                                20
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span className="badge bg-warning text-dark">
-                                                20
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        {/* End Employee Data 01 */}
+                        <AllocationTable
+                            options={allocationOptions}
+                        ></AllocationTable>
                     </div>
+
                     {/* Employee Overview */}
                     <div className="collapse mt-3" id="collapseExample2">
-                        {/* Select Employee Dropdown */}
-                        <div className="dropdown">
-                            <button
-                                className="btn btn-primary dropdown-toggle"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                <span className="bi bi-person-check" />
-                                Select Employee
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li>
-                                    <a
-                                        className="dropdown-item"
-                                        href="http://localhost:3000/index.html"
-                                    >
-                                        John Smith
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        className="dropdown-item"
-                                        href="http://localhost:3000/index.html"
-                                    >
-                                        John Smith
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        className="dropdown-item"
-                                        href="http://localhost:3000/index.html"
-                                    >
-                                        John Smith
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        className="dropdown-item"
-                                        href="http://localhost:3000/index.html"
-                                    >
-                                        John Smith
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        {/* Select Employee End Dropdown */}
+                        <Select
+                            placeholder="Filter by Employee..."
+                            options={employeeOptions}
+                        ></Select>
                         <div className="row mt-3">
                             <div className="col-lg-6">
                                 <div className="card mb-4">
                                     <div className="card-body text-center mt-4">
                                         <img
-                                            src="assets/img/profile-img.jpg "
+                                            src="profile-img.jpg"
                                             alt="avatar"
-                                            className="rounded-circle img-fluid"
-                                            style={{ width: 150 }}
+                                            className="rounded-circle"
                                         />
                                         <h5 className="my-3">John Smith</h5>
                                         <p className="text-muted mb-1">

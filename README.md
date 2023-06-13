@@ -6,4 +6,4 @@
 
 #### Thank you 😃❤️💙
 
-#### Website Link -> [GRM App](https://lustrous-croquembouche-1116b9.netlify.app/index.html)
+#### Website Link -> [GRM App](https://snazzy-blini-eab8dc.netlify.app/)
