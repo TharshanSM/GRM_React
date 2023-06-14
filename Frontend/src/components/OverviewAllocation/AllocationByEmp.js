@@ -1,4 +1,4 @@
-function AllocationTable({ options }) {
+function AllocationByEmp({ options, employee }) {
     // Grouping Allocation Data By Given Input
     const groupData = (data) => {
         const groupedData = {};
@@ -15,6 +15,7 @@ function AllocationTable({ options }) {
 
     return (
         <>
+            {console.log(employee)}
             {Object.keys(groupedData).map((employee) => (
                 <div className="card card-body mt-3 pt-3 col">
                     <h5 className="card-title text-center fs-4">{employee}</h5>
@@ -34,7 +35,7 @@ function AllocationTable({ options }) {
                             {groupedData[employee].map((item) => (
                                 <tr>
                                     <th scope="row">{item.project}</th>
-                                    <th scope="row">{item.role}</th>
+                                    <th>{item.role}</th>
                                     <td>{item.allocation}</td>
                                     <td>{item.allocation}</td>
                                     <td>{item.allocation}</td>
@@ -42,6 +43,52 @@ function AllocationTable({ options }) {
                                     <td>{item.allocation}</td>
                                 </tr>
                             ))}
+                            <tr>
+                                <th scope="row" className="text-muted">
+                                    Leave
+                                </th>
+                                <td>
+                                    <span className="badge bg-info"></span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-info">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-info">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-info">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-info">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-info ">0</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className="text-muted">
+                                    Public Holiday
+                                </th>
+                                <td>
+                                    <span className="badge bg-danger"></span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-danger">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-danger">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-danger">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-danger">0</span>
+                                </td>
+                                <td>
+                                    <span className="badge bg-danger">0</span>
+                                </td>
+                            </tr>
                             <tr>
                                 <th scope="row" className="text-muted">
                                     Total Allocations
@@ -62,7 +109,9 @@ function AllocationTable({ options }) {
                                     <span className="badge bg-success">80</span>
                                 </td>
                                 <td>
-                                    <span className="badge bg-success">80</span>
+                                    <span className="badge bg-success ">
+                                        80
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -106,4 +155,4 @@ function AllocationTable({ options }) {
     );
 }
 
-export default AllocationTable;
+export default AllocationByEmp;
