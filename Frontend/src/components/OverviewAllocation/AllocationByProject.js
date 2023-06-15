@@ -16,14 +16,39 @@ function AllocationByProject({ options, project }) {
                         </tr>
                     </thead>
                     <tbody>
+                        {options.map((item) => (
+                            <tr>
+                                <th scope="row">{item.employee}</th>
+                                <th>{item.role}</th>
+                                <td>{item.allocation}</td>
+                                <td>{item.allocation}</td>
+                                <td>{item.allocation}</td>
+                                <td>{item.allocation}</td>
+                                <td>{item.allocation}</td>
+                            </tr>
+                        ))}
                         <tr>
-                            <th scope="row">{}</th>
-                            <th>{}</th>
-                            <td>{}</td>
-                            <td>{}</td>
-                            <td>{}</td>
-                            <td>{}</td>
-                            <td>{}</td>
+                            <th scope="row" className="text-muted">
+                                Total Allocations
+                            </th>
+                            <td>
+                                <span className="badge bg-success"></span>
+                            </td>
+                            <td>
+                                <span className="badge bg-success">80</span>
+                            </td>
+                            <td>
+                                <span className="badge bg-success">80</span>
+                            </td>
+                            <td>
+                                <span className="badge bg-success">80</span>
+                            </td>
+                            <td>
+                                <span className="badge bg-success">80</span>
+                            </td>
+                            <td>
+                                <span className="badge bg-success ">80</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

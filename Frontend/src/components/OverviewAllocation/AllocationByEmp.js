@@ -1,16 +1,16 @@
-function AllocationByEmp({ options, employee }) {
-    // Grouping Allocation Data By Given Input
-    const groupData = (data) => {
-        const groupedData = {};
-        data.forEach((item) => {
-            if (!groupedData[item.employee]) {
-                groupedData[item.employee] = [];
-            }
-            groupedData[item.employee].push(item);
-        });
-        return groupedData;
-    };
+// Grouping Allocation Data By Given Input
+const groupData = (data) => {
+    const groupedData = {};
+    data.forEach((item) => {
+        if (!groupedData[item.employee]) {
+            groupedData[item.employee] = [];
+        }
+        groupedData[item.employee].push(item);
+    });
+    return groupedData;
+};
 
+function AllocationByEmp({ options, employee }) {
     const groupedData = groupData(options);
 
     return (
