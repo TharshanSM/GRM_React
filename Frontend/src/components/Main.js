@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import AllocationTable from "./OverviewAllocation/AllocationTable";
+import AllocationByEmp from "./OverviewAllocation/AllocationByEmp";
+import AllocationByProject from "./OverviewAllocation/AllocationByProject";
 
 const allocationOptions = [
     {
@@ -184,6 +185,9 @@ function Main() {
     const [weeks, setWeeks] = useState([]);
     const [allocation, setAllocation] = useState("");
 
+    const [selectedEmployee, setSelectedEmployee] = useState([]);
+    const [selectedProject, setSelectedProject] = useState([]);
+
     const handleChangeEmployee = (selectedOption) => {
         setEmployees(selectedOption);
     };
@@ -212,6 +216,14 @@ function Main() {
         console.log("Role:", role);
         console.log("Weeks:", weeks);
         console.log("Allocation:", allocation);
+    };
+
+    const handleEmployeeSelect = (selectedOption) => {
+        setSelectedEmployee(selectedOption);
+    };
+
+    const handleProjectSelect = (selectedOption) => {
+        setSelectedProject(selectedOption);
     };
 
     return (
@@ -409,12 +421,38 @@ function Main() {
                                     }
                                     options={employeeOptions}
                                     isMulti
+                                    onChange={handleEmployeeSelect}
+                                ></Select>
+                            </div>
+                            <div className="pt-3 ps-1">
+                                <Select
+                                    placeholder={
+                                        <span class="bi bi-person-check">
+                                            {"  "}Filter by Project...
+                                        </span>
+                                    }
+                                    options={projectOptions}
+                                    onChange={handleProjectSelect}
+                                    isMulti
                                 ></Select>
                             </div>
                         </div>
-                        <AllocationTable
-                            options={allocationOptions}
-                        ></AllocationTable>
+
+                        {selectedEmployee.length > 0 &&
+                            selectedEmployee.map((employee) => (
+                                <AllocationByEmp
+                                    options={allocationOptions}
+                                    employee={employee}
+                                ></AllocationByEmp>
+                            ))}
+
+                        {selectedProject.length > 0 &&
+                            selectedProject.map((project) => (
+                                <AllocationByProject
+                                    options={allocationOptions}
+                                    project={project}
+                                ></AllocationByProject>
+                            ))}
                     </div>
 
                     {/* Employee Overview */}
@@ -442,7 +480,7 @@ function Main() {
                                         <div className="d-flex justify-content-center mb-2">
                                             <button
                                                 type="button"
-                                                className="btn btn-primary"
+                                                className="btn btn-outline-primary ms-1"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal"
                                             >
