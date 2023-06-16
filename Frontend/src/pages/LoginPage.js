@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     let navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [usernameError, setUsernameError] = useState(false);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        navigate("/main");
+        console.log(username, password);
+
+        if (username.trim() === "") {
+            setUsernameError(true);
+        }
+
+        if (username.trim() === "Admin" || password.trim() === "Admin123") {
+            navigate("/main");
+        } else {
+            alert("Invalid Username/Password");
+        }
+    };
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+        setUsernameError(false);
+    };
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
     };
 
     return (
@@ -64,11 +86,21 @@ const LoginPage = () => {
                                                         className="form-control"
                                                         id="yourUsername"
                                                         required=""
+                                                        value={username}
+                                                        onChange={
+                                                            handleUsernameChange
+                                                        }
                                                     />
-                                                    <div className="invalid-feedback">
+                                                    {usernameError && (
+                                                        <div className="invalid-feedback">
+                                                            Please enter your
+                                                            username.
+                                                        </div>
+                                                    )}
+                                                    {/* <div className="invalid-feedback">
                                                         Please enter your
                                                         username.
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                             <div className="col-12">
@@ -84,10 +116,15 @@ const LoginPage = () => {
                                                     className="form-control"
                                                     id="yourPassword"
                                                     required=""
+                                                    value={password}
+                                                    onChange={
+                                                        handlePasswordChange
+                                                    }
                                                 />
-                                                <div className="invalid-feedback">
+
+                                                {/* <div className="invalid-feedback">
                                                     Please enter your password!
-                                                </div>
+                                                </div> */}
                                             </div>
                                             <div className="col-12">
                                                 <div className="form-check">
