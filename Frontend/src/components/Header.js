@@ -223,14 +223,14 @@ function Header() {
                                 className="rounded-circle"
                             />
                             <span className="d-none d-md-block dropdown-toggle ps-2">
-                                K. Anderson
+                                Admin
                             </span>{" "}
                         </a>
                         {/* End Profile Iamge Icon */}
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li className="dropdown-header">
-                                <h6>Kevin Anderson</h6>
-                                <span>Web Designer</span>
+                                <h6>Admin Admin</h6>
+                                <span>Consulting Manager - Novacura LK</span>
                             </li>
                             <li>
                                 <hr className="dropdown-divider" />
