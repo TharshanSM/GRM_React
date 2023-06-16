@@ -1,24 +1,29 @@
+import { Link } from "react-router-dom";
+
 function Sidebar() {
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
                 <li className="nav-item">
-                    <a className="nav-link" href="index.html">
+                    <Link to="/dashboard" className="nav-link">
                         <i className="bi bi-grid" />
                         <span>Dashboard</span>
-                    </a>
+                    </Link>
                 </li>
-                {/* End Dashboard Nav */}
+
                 <li className="nav-item">
-                    <a
-                        className="nav-link collapsed"
-                        href="pages-schedule.html"
-                    >
-                        <i className="bi bi-book" />
+                    <Link to="/main" className="nav-link collapsed">
+                        <i className="bi bi-calendar3" />
                         <span>Schedule</span>
-                    </a>
+                    </Link>
                 </li>
-                {/* End Schedule Nav */}
+
+                <li className="nav-item">
+                    <Link to="/employee" className="nav-link collapsed">
+                        <i className="bi bi-people-fill" />
+                        <span>Employee Overview</span>
+                    </Link>
+                </li>
             </ul>
         </aside>
     );

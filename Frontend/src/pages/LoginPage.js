@@ -16,7 +16,7 @@ const LoginPage = () => {
         }
 
         if (username.trim() === "Admin" || password.trim() === "Admin123") {
-            navigate("/main");
+            navigate("/dashboard");
         } else {
             alert("Invalid Username/Password");
         }
