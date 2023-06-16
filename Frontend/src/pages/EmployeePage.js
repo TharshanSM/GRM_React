@@ -22,7 +22,7 @@ const EmployeePage = () => {
     return (
         <>
             <Header></Header>
-            <Sidebar></Sidebar>
+            <Sidebar active="employee"></Sidebar>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Employee Overview</h1>

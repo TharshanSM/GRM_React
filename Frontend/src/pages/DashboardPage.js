@@ -7,7 +7,7 @@ const DashboardPage = () => {
     return (
         <>
             <Header></Header>
-            <Sidebar></Sidebar>
+            <Sidebar active="dashboard"></Sidebar>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Dashboard</h1>
