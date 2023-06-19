@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Sidebar({ active }) {
+function Sidebar({ active, role }) {
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">

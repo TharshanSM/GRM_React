@@ -1,9 +1,14 @@
 import React from "react";
+//import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 
 const DashboardPage = () => {
+    // const location = useLocation();
+    // const { role } = location.state;
+    // console.log(role);
+
     return (
         <>
             <Header></Header>
