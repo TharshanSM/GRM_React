@@ -193,7 +193,7 @@ const ButtonGroup = () => {
             {buttons.map(({ label, icon, target }) => (
                 <a
                     key={label}
-                    className="btn btn-outline-primary"
+                    className="btn btn-outline-primary me-1"
                     data-bs-toggle="collapse"
                     href={`#${target}`}
                     role="button"
@@ -263,7 +263,7 @@ function HomePage() {
     return (
         <>
             <Header></Header>
-            <Sidebar></Sidebar>
+            <Sidebar active="main"></Sidebar>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Schedule</h1>
@@ -278,7 +278,7 @@ function HomePage() {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <div className="btn-group">
+                        <div>
                             <ButtonGroup></ButtonGroup>
                         </div>
 

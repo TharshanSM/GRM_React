@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 function Header() {
     return (
         <header
@@ -244,41 +247,15 @@ function Header() {
                                     <span>My Profile</span>
                                 </a>
                             </li>
+
                             <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-                            <li>
-                                <a
+                                <Link
+                                    to="/"
                                     className="dropdown-item d-flex align-items-center"
-                                    href="pages-profile.html"
-                                >
-                                    <i className="bi bi-gear" />
-                                    <span>Account Settings</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-                            <li>
-                                <a
-                                    className="dropdown-item d-flex align-items-center"
-                                    href="pages-faq.html"
-                                >
-                                    <i className="bi bi-question-circle" />
-                                    <span>Need Help?</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-                            <li>
-                                <a
-                                    className="dropdown-item d-flex align-items-center"
-                                    href="http://localhost:3000/index.html"
                                 >
                                     <i className="bi bi-box-arrow-right" />
-                                    <span>Sign Out</span>
-                                </a>
+                                    <span>Logout</span>
+                                </Link>
                             </li>
                         </ul>
                         {/* End Profile Dropdown Items */}

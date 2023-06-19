@@ -15,8 +15,14 @@ const LoginPage = () => {
             setUsernameError(true);
         }
 
-        if (username.trim() === "Admin" || password.trim() === "Admin123") {
-            navigate("/dashboard");
+        // Validation
+        if (username.trim() === "Admin" && password.trim() === "Admin123") {
+            navigate("/dashboard", { state: { role: "admin" } });
+        } else if (
+            username.trim() === "John" &&
+            password.trim() === "John123"
+        ) {
+            navigate("/dashboard", { state: { role: "emp" } });
         } else {
             alert("Invalid Username/Password");
         }
