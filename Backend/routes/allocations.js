@@ -51,7 +51,7 @@ router.post("/add", async (req, res) => {
     try {
         const pool = await sql.connect(dbconfig);
         const result = await pool.request().query(query);
-        res.send(result);
+        res.json({ result: result, output: "Value Inserted Sucessfully" });
     } catch (err) {
         console.log(err);
     }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Sidebar({ active, role }) {
+function Sidebar({ active, userrole }) {
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
@@ -27,6 +27,30 @@ function Sidebar({ active, role }) {
                         <span>Schedule</span>
                     </Link>
                 </li>
+                {/* <ul className="submenu">
+                    <li>
+                        <Link
+                            to="/main/submenu2"
+                            className={`nav-link ${
+                                active === "submenu2" ? "" : "collapsed"
+                            }`}
+                        >
+                            <i className="bi bi-calendar3" />
+                            <span>Overview</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/main/submenu1"
+                            className={`nav-link ${
+                                active === "submenu1" ? "" : "collapsed"
+                            }`}
+                        >
+                            <i className="bi bi-calendar3" />
+                            <span>Add Allocation</span>
+                        </Link>
+                    </li>
+                </ul> */}
 
                 <li className="nav-item">
                     <Link
@@ -39,6 +63,20 @@ function Sidebar({ active, role }) {
                         <span>Employee Overview</span>
                     </Link>
                 </li>
+
+                {userrole === "emp" && (
+                    <li className="nav-item">
+                        <Link
+                            to="/employee"
+                            className={`nav-link ${
+                                active === "employee" ? "" : "collapsed"
+                            }`}
+                        >
+                            <i className="bi bi-view-list" />
+                            <span>View Allocation</span>
+                        </Link>
+                    </li>
+                )}
             </ul>
         </aside>
     );
