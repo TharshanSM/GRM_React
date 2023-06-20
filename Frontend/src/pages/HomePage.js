@@ -353,27 +353,26 @@ function HomePage() {
                             <ButtonGroup></ButtonGroup>
                         </div>
 
-                        {errorMessage && (
-                            <div
-                                className=" mt-3 alert alert-danger alert-dismissible fade show"
-                                role="alert"
-                            >
-                                <span class="bi bi-check2-circle"></span>{" "}
-                                {errorMessage}
-                            </div>
-                        )}
-
-                        {successMessage && (
-                            <div
-                                className=" mt-3 alert alert-success alert-dismissible fade show"
-                                role="alert"
-                            >
-                                <span class="bi bi-check2-circle"></span>{" "}
-                                {successMessage}
-                            </div>
-                        )}
-
                         <div className="collapse" id="collapseExample">
+                            {errorMessage && (
+                                <div
+                                    className=" mt-3 alert alert-danger alert-dismissible fade show"
+                                    role="alert"
+                                >
+                                    <span class="bi bi-check2-circle"></span>{" "}
+                                    {errorMessage}
+                                </div>
+                            )}
+
+                            {successMessage && (
+                                <div
+                                    className=" mt-3 alert alert-success alert-dismissible fade show"
+                                    role="alert"
+                                >
+                                    <span class="bi bi-check2-circle"></span>{" "}
+                                    {successMessage}
+                                </div>
+                            )}
                             <div className="card card-body mt-3 pt-3">
                                 <form onSubmit={handleFormSubmit}>
                                     <div className="row mb-3">
