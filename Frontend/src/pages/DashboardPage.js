@@ -1,18 +1,18 @@
-import React from "react";
-//import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 
 const DashboardPage = () => {
-    // const location = useLocation();
-    // const { role } = location.state;
-    // console.log(role);
+    const location = useLocation();
+    const { role } = location.state;
+    const [userrole, setUserrole] = useState(role);
 
     return (
         <>
             <Header></Header>
-            <Sidebar active="dashboard"></Sidebar>
+            <Sidebar active="dashboard" userrole={userrole}></Sidebar>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Dashboard</h1>
