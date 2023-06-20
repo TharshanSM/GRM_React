@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Sidebar({ active, userrole }) {
+function Sidebar({ active }) {
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
@@ -64,19 +64,17 @@ function Sidebar({ active, userrole }) {
                     </Link>
                 </li>
 
-                {userrole === "emp" && (
-                    <li className="nav-item">
-                        <Link
-                            to="/employee"
-                            className={`nav-link ${
-                                active === "employee" ? "" : "collapsed"
-                            }`}
-                        >
-                            <i className="bi bi-view-list" />
-                            <span>View Allocation</span>
-                        </Link>
-                    </li>
-                )}
+                <li className="nav-item">
+                    <Link
+                        to="/employee"
+                        className={`nav-link ${
+                            active === "employee" ? "" : "collapsed"
+                        }`}
+                    >
+                        <i className="bi bi-view-list" />
+                        <span>View Allocation</span>
+                    </Link>
+                </li>
             </ul>
         </aside>
     );
