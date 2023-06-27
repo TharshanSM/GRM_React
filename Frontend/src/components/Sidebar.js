@@ -63,18 +63,6 @@ function Sidebar({ active }) {
                         <span>Employee Overview</span>
                     </Link>
                 </li>
-
-                <li className="nav-item">
-                    <Link
-                        to="/employee"
-                        className={`nav-link ${
-                            active === "employee" ? "" : "collapsed"
-                        }`}
-                    >
-                        <i className="bi bi-view-list" />
-                        <span>View Allocation</span>
-                    </Link>
-                </li>
             </ul>
         </aside>
     );

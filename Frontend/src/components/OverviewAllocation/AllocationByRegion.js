@@ -9,7 +9,7 @@ const AllocationByRegion = ({ options, region }) => {
                     <thead>
                         <tr>
                             <th scope="col">Employees</th>
-                            <th scope="col">Roles</th>
+                            <th scope="col">Project</th>
                             <th scope="col">W-01</th>
                             <th scope="col">W-02</th>
                             <th scope="col">W-03</th>
@@ -20,8 +20,10 @@ const AllocationByRegion = ({ options, region }) => {
                     <tbody>
                         {options.map((item) => (
                             <tr>
-                                <th scope="row">{item.employee}</th>
-                                <th>{item.role}</th>
+                                <th scope="row">
+                                    {item.employee} / {item.role}
+                                </th>
+                                <th>{item.project}</th>
                                 <td>{item.allocation}</td>
                                 <td>{item.allocation}</td>
                                 <td>{item.allocation}</td>

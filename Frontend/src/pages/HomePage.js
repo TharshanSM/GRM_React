@@ -379,23 +379,6 @@ function HomePage() {
                                             htmlFor="inputText"
                                             className="col-sm-4 col-form-label"
                                         >
-                                            Employee(s)
-                                        </label>
-                                        <div className="col-sm-8">
-                                            <Select
-                                                options={employeeOptions}
-                                                onChange={handleChangeEmployee}
-                                                isMulti
-                                                isSearchable
-                                            ></Select>
-                                        </div>
-                                    </div>
-
-                                    <div className="row mb-3">
-                                        <label
-                                            htmlFor="inputText"
-                                            className="col-sm-4 col-form-label"
-                                        >
                                             Project
                                         </label>
                                         <div className="col-sm-8">
@@ -436,6 +419,23 @@ function HomePage() {
                                                     option.disabled
                                                 }
                                                 isMulti
+                                            ></Select>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-3">
+                                        <label
+                                            htmlFor="inputText"
+                                            className="col-sm-4 col-form-label"
+                                        >
+                                            Employee(s)
+                                        </label>
+                                        <div className="col-sm-8">
+                                            <Select
+                                                options={employeeOptions}
+                                                onChange={handleChangeEmployee}
+                                                isMulti
+                                                isSearchable
                                             ></Select>
                                         </div>
                                     </div>
