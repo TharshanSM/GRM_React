@@ -12,13 +12,25 @@ const employeeAllocationSchema = new Schema(
             { type: Schema.Types.ObjectId, ref: "Allocation" },
         ],
         leave: { type: Number, default: 0 },
-        public_holiday: { type: Number, defualt: 0 },
+        public_holiday: { type: Number, default: 0 },
         vacation: { type: Number, default: 0 },
-        sum: { type: Number, default: 0 },
-        available: { type: Number, default: 0 },
     },
-    { timestamps: true }
+    { timestamps: true, toJSON: { virtuals: true } }
 );
+
+employeeAllocationSchema.virtual("sum").get(function () {
+    const allocationDetails = this.allocation_details || [];
+    const sumAllocation = allocationDetails.reduce(
+        (acc, detail) => acc + detail.allocation,
+        0
+    );
+
+    return sumAllocation + this.leave + this.public_holiday + this.vacation;
+});
+
+employeeAllocationSchema.virtual("available").get(function () {
+    return 100 - this.sum;
+});
 
 const EmployeeAllocation = model(
     "EmployeeAllocation",

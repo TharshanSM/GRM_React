@@ -84,12 +84,12 @@ router.post("/add", async (req, res) => {
         allocation,
     } = req.body;
 
-    const allocation_ = new Allocation({
+    const allocation_ = Allocation.create({
         customer: customer,
         role: role,
         allocation: allocation,
         week_no: week_no,
-    }).save();
+    });
 
     const employeeAllocation = EmployeeAllocation.create({
         emp_name: emp_name,
