@@ -2,8 +2,23 @@ const router = require("express").Router();
 const sql = require("mssql");
 const dbconfig = require("../dbconfig");
 
+const EmployeeAllocation = require("../models/employeeAllocationModel");
+const Allocation = require("../models/allocationModel");
+
 // Get All The Allocations Details
 router.get("/get", async (req, res) => {
+    const employeeAllocation = await EmployeeAllocation.find().populate(
+        "allocation_details"
+    );
+
+    if (employeeAllocation) {
+        res.status(200).json({
+            result: employeeAllocation,
+        });
+    }
+});
+
+/*router.get("/get", async (req, res) => {
     const query = ` 
     SELECT  emp.id                'employee_id',
             week.id               'week_number',
@@ -31,10 +46,10 @@ router.get("/get", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-});
+});*/
 
 // Create Allocation
-router.post("/add", async (req, res) => {
+/*router.post("/add", async (req, res) => {
     const { emp_id, project_id, role_id, week_id, allocation } = req.body;
     const query = `INSERT INTO [grm].[weekly_allocations]
         ([emp_id]
@@ -55,10 +70,48 @@ router.post("/add", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+});*/
+
+// Create Allocation
+router.post("/add", async (req, res) => {
+    const {
+        emp_name,
+        cm_group,
+        week_no,
+        week_start_date,
+        customer,
+        role,
+        allocation,
+    } = req.body;
+
+    const allocation_ = new Allocation({
+        customer: customer,
+        role: role,
+        allocation: allocation,
+        week_no: week_no,
+    }).save();
+
+    const employeeAllocation = EmployeeAllocation.create({
+        emp_name: emp_name,
+        cm_group: cm_group,
+        week_no: week_no,
+        week_start_date: week_start_date,
+        allocation_details: [(await allocation_)._id],
+    });
+
+    if (employeeAllocation) {
+        res.status(201).json({
+            message: "Successful",
+            _id: (await employeeAllocation)._id,
+        });
+    } else {
+        res.status(400);
+        throw new error("Failed");
+    }
 });
 
 // Get Allocation Details By Employee
-router.get("/getAllocationDetailsByEmpID/:emp_id", async (req, res) => {
+/*router.get("/getAllocationDetailsByEmpID/:emp_id", async (req, res) => {
     const { emp_id } = req.params;
     const query = ` SELECT   proj.name AS 'Project',
                             role.description AS 'Roles',
@@ -79,6 +132,6 @@ router.get("/getAllocationDetailsByEmpID/:emp_id", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-});
+});*/
 
 module.exports = router;
