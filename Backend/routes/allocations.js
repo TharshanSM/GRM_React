@@ -3,7 +3,7 @@ const {
     getDetails,
     getDetailsByEmpName,
     addAllocation,
-} = require("../handlers/employeeAllocationHandler");
+} = require("../controllers/employeeAllocationController");
 
 router.get("/getDetails", getDetails);
 
