@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const sql = require("mssql");
-const oracledb = require("oracledb");
 const dbconfig = require("../dbconfig");
+const User = require("../models/userModel");
 
-// Get All EMployee
+// Get All Employee
 router.get("/get", async (req, res) => {
     const query =
         "SELECT [id],[first_name],[last_name],[join_date],[status],[manager_id] FROM [grm].[employees]";
@@ -35,6 +35,24 @@ router.post("/add", async (req, res) => {
     }
 });
 
-// Get Employee Details on Oracle
+// Testing Purposes
+router.get("/test", async (req, res) => {
+    const user = User.create({
+        name: "John Doe 2",
+        email: "john@example.com",
+        age: 25,
+    });
+
+    if (user) {
+        res.status(200).json({
+            _id: (await user)._id,
+            name: (await user).name,
+            email: (await user).email,
+        });
+    } else {
+        res.status(400);
+        throw new error("Invalid user data");
+    }
+});
 
 module.exports = router;
