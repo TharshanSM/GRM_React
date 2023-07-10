@@ -82,6 +82,7 @@ module.exports.addAllocation = async (req, res) => {
         console.error("Failed to add/update employee allocation:", error);
         res.status(500).json({
             message: "Internal Server Error",
+            error: error.message,
         });
     }
 };

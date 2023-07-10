@@ -165,38 +165,14 @@ const roleOptions = [
 ];
 
 const weekOptions = [
-    { value: 1, label: "Week 01", disabled: true },
-    { value: 2, label: "Week 02", disabled: true },
-    { value: 3, label: "Week 03", disabled: true },
-    { value: 4, label: "Week 04", disabled: true },
-    { value: 5, label: "Week 05", disabled: true },
-    { value: 6, label: "Week 06", disabled: true },
-    { value: 7, label: "Week 07", disabled: true },
-    { value: 8, label: "Week 08", disabled: true },
-    { value: 9, label: "Week 09", disabled: true },
-    { value: 10, label: "Week 10", disabled: true },
-    { value: 11, label: "Week 11", disabled: true },
-    { value: 12, label: "Week 12", disabled: true },
-    { value: 13, label: "Week 13", disabled: true },
-    { value: 14, label: "Week 14", disabled: true },
-    { value: 15, label: "Week 15", disabled: true },
-    { value: 16, label: "Week 16", disabled: true },
-    { value: 17, label: "Week 17", disabled: true },
-    { value: 18, label: "Week 18", disabled: true },
-    { value: 19, label: "Week 19", disabled: true },
-    { value: 20, label: "Week 20", disabled: true },
-    { value: 20, label: "Week 20", disabled: true },
-    { value: 21, label: "Week 21", disabled: true },
-    { value: 22, label: "Week 22", disabled: true },
-    { value: 23, label: "Week 23", disabled: true },
-    { value: 24, label: "Week 24", disabled: true },
-    { value: 25, label: "Week 25" },
-    { value: 26, label: "Week 26" },
-    { value: 27, label: "Week 27" },
-    { value: 28, label: "Week 28" },
-    { value: 29, label: "Week 29" },
-    { value: 30, label: "Week 30" },
-    { value: 31, label: "Week 31" },
+    { value: 28, label: "Week No 28 / 2023-07-10" },
+    { value: 29, label: "Week No 29 / 2023-07-17" },
+    { value: 30, label: "Week No 30 / 2023-07-24" },
+    { value: 31, label: "Week No 31 / 2023-07-31" },
+    { value: 32, label: "Week No 32 / 2023-08-07" },
+    { value: 33, label: "Week No 33 / 2023-08-14" },
+    { value: 34, label: "Week No 34 / 2023-08-21" },
+    { value: 35, label: "Week No 35 / 2023-08-28" },
 ];
 
 const monthOptions = [
@@ -275,26 +251,51 @@ function HomePage() {
             allocation === ""
         ) {
             setErrorMessage("Please Select Fields");
-        }
-        // Add Allocation
-        try {
-            const response = await axios.post(
-                "http://localhost:3000/allocations/add",
-                {
-                    emp_id: employees[0].value,
-                    project_id: project.value,
-                    role_id: role.value,
-                    week_id: weeks[0].value,
-                    allocation: allocation,
-                }
-            );
-            console.log(response.data);
-            setSuccessMessage(response.data.output);
-            setTimeout(() => {
-                navigate("/main");
-            }, 2000);
-        } catch (error) {
-            console.log(error);
+        } else {
+            try {
+                await Promise.all(
+                    employees.map(async (emp) => {
+                        await Promise.all(
+                            weeks.map(async (week) => {
+                                const label = week.label;
+                                const parts = label.split(" / ");
+                                const weekNo = parts[0].split(" ")[2];
+                                const date = parts[1];
+
+                                // console.log({
+                                //     employee: emp.label,
+                                //     week: weekNo,
+                                //     week_start_date: date,
+                                //     customer: project.label,
+                                //     role: role.label,
+                                //     allocation: allocation,
+                                // });
+
+                                const response = await axios.post(
+                                    "http://localhost:3000/allocations/addEmployeeAllocation",
+                                    {
+                                        emp_name: emp.label,
+                                        cm_group: "Sri Lanka",
+                                        week_no: weekNo,
+                                        week_start_date: date,
+                                        customer: project.label,
+                                        role: role.label,
+                                        allocation: allocation,
+                                    }
+                                );
+                                console.log(response.data);
+                            })
+                        );
+                    })
+                );
+
+                setSuccessMessage("All allocations added successfully");
+                setTimeout(() => {
+                    navigate("/main");
+                }, 2000);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 
