@@ -18,39 +18,27 @@ function Sidebar({ active }) {
 
                 <li className="nav-item">
                     <Link
+                        to="/overview"
+                        className={`nav-link ${
+                            active === "overview" ? "" : "collapsed"
+                        }`}
+                    >
+                        <i className="bi bi-grid" />
+                        <span>Overview</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link
                         to="/main"
                         className={`nav-link ${
                             active === "main" ? "" : "collapsed"
                         }`}
                     >
-                        <i className="bi bi-calendar3" />
+                        <i className="bi bi-grid" />
                         <span>Schedule</span>
                     </Link>
                 </li>
-                {/* <ul className="submenu">
-                    <li>
-                        <Link
-                            to="/main/submenu2"
-                            className={`nav-link ${
-                                active === "submenu2" ? "" : "collapsed"
-                            }`}
-                        >
-                            <i className="bi bi-calendar3" />
-                            <span>Overview</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/main/submenu1"
-                            className={`nav-link ${
-                                active === "submenu1" ? "" : "collapsed"
-                            }`}
-                        >
-                            <i className="bi bi-calendar3" />
-                            <span>Add Allocation</span>
-                        </Link>
-                    </li>
-                </ul> */}
 
                 <li className="nav-item">
                     <Link
@@ -59,8 +47,8 @@ function Sidebar({ active }) {
                             active === "employee" ? "" : "collapsed"
                         }`}
                     >
-                        <i className="bi bi-people-fill" />
-                        <span>Employee Overview</span>
+                        <i className="bi bi-grid" />
+                        <span>Employee Summary</span>
                     </Link>
                 </li>
             </ul>

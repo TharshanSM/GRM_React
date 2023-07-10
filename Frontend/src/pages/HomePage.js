@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import AllocationByEmp from "../components/OverviewAllocation/AllocationByEmp";
 import AllocationByProject from "../components/OverviewAllocation/AllocationByProject";
@@ -51,81 +50,6 @@ const regionOptions = [
     {
         value: 10,
         label: "Sri Lanka",
-    },
-];
-
-const allocationOptions = [
-    {
-        value: 1,
-        employee: "John Smith",
-        project: "Singer Sri Lanka",
-        role: "Developer",
-        week: "Week 09 | Feb 27 - Mar 03",
-        allocation: 20,
-    },
-    {
-        value: 2,
-        employee: "John Smith",
-        project: "Woerly",
-        role: "Developer",
-        week: "Week 09 | Feb 27 - Mar 03",
-        allocation: 60,
-    },
-    {
-        value: 3,
-        employee: "John Smith",
-        project: "VBG",
-        role: "Developer",
-        week: "Week 09 | Feb 27 - Mar 03",
-        allocation: 10,
-    },
-    {
-        value: 4,
-        employee: "John Smith",
-        project: "Singer Sri Lanka",
-        role: "Developer",
-        week: "Week 10 | Mar 06 - Mar 10",
-        allocation: 40,
-    },
-    {
-        value: 5,
-        employee: "John Smith",
-        project: "Woerly",
-        role: "Developer",
-        week: "Week 10 | Mar 06 - Mar 10",
-        allocation: 20,
-    },
-    {
-        value: 6,
-        employee: "John Smith",
-        project: "VBG",
-        role: "Developer",
-        week: "Week 10 | Mar 06 - Mar 10",
-        allocation: 20,
-    },
-    {
-        value: 4,
-        employee: "Donald OConnell",
-        project: "Singer Sri Lanka",
-        role: "Developer",
-        week: "Week 09 | Feb 27 - Mar 03",
-        allocation: 10,
-    },
-    {
-        value: 5,
-        employee: "Donald OConnell",
-        project: "Woerly",
-        role: "Developer",
-        week: "Week 09 | Feb 27 - Mar 03",
-        allocation: 40,
-    },
-    {
-        value: 6,
-        employee: "Donald OConnell",
-        project: "VBG",
-        role: "Developer",
-        week: "Week 09 | Feb 27 - Mar 03",
-        allocation: 10,
     },
 ];
 
@@ -224,7 +148,6 @@ const ButtonGroup = () => {
 };
 
 function HomePage() {
-    const navigate = useNavigate();
     const [employees, setEmployees] = useState([]);
     const [project, setProject] = useState(null);
     const [role, setRole] = useState(null);
@@ -262,14 +185,14 @@ function HomePage() {
                                 const weekNo = parts[0].split(" ")[2];
                                 const date = parts[1];
 
-                                // console.log({
-                                //     employee: emp.label,
-                                //     week: weekNo,
-                                //     week_start_date: date,
-                                //     customer: project.label,
-                                //     role: role.label,
-                                //     allocation: allocation,
-                                // });
+                                console.log({
+                                    employee: emp.label,
+                                    week: weekNo,
+                                    week_start_date: date,
+                                    customer: project.label,
+                                    role: role.label,
+                                    allocation: allocation,
+                                });
 
                                 const response = await axios.post(
                                     "http://localhost:3000/allocations/addEmployeeAllocation",
@@ -290,9 +213,6 @@ function HomePage() {
                 );
 
                 setSuccessMessage("All allocations added successfully");
-                setTimeout(() => {
-                    navigate("/main");
-                }, 2000);
             } catch (error) {
                 console.log(error);
             }
@@ -359,7 +279,7 @@ function HomePage() {
                                     className=" mt-3 alert alert-danger alert-dismissible fade show"
                                     role="alert"
                                 >
-                                    <span class="bi bi-check2-circle"></span>{" "}
+                                    <span className="bi bi-check2-circle"></span>{" "}
                                     {errorMessage}
                                 </div>
                             )}
@@ -369,7 +289,7 @@ function HomePage() {
                                     className=" mt-3 alert alert-success alert-dismissible fade show"
                                     role="alert"
                                 >
-                                    <span class="bi bi-check2-circle"></span>{" "}
+                                    <span className="bi bi-check2-circle"></span>{" "}
                                     {successMessage}
                                 </div>
                             )}
@@ -416,9 +336,6 @@ function HomePage() {
                                             <Select
                                                 options={weekOptions}
                                                 onChange={handleChangeWeek}
-                                                isOptionDisabled={(option) =>
-                                                    option.disabled
-                                                }
                                                 isMulti
                                             ></Select>
                                         </div>
@@ -495,7 +412,7 @@ function HomePage() {
                                 <div className="pt-3">
                                     <Select
                                         placeholder={
-                                            <span class="bi bi-calendar2-check">
+                                            <span className="bi bi-calendar2-check">
                                                 {"  "}Filter By Month...
                                             </span>
                                         }
@@ -507,7 +424,7 @@ function HomePage() {
                                 <div className="pt-3 ps-1">
                                     <Select
                                         placeholder={
-                                            <span class="bi bi-person-check">
+                                            <span className="bi bi-person-check">
                                                 {"  "}Filter by Employee...
                                             </span>
                                         }
@@ -519,7 +436,7 @@ function HomePage() {
                                 <div className="pt-3 ps-1">
                                     <Select
                                         placeholder={
-                                            <span class="bi bi-list-task">
+                                            <span className="bi bi-list-task">
                                                 {"  "}Filter by Project...
                                             </span>
                                         }
@@ -531,7 +448,7 @@ function HomePage() {
                                 <div className="pt-3 ps-1">
                                     <Select
                                         placeholder={
-                                            <span class="bi bi-geo-alt-fill">
+                                            <span className="bi bi-geo-alt-fill">
                                                 {"  "}Filter by Region...
                                             </span>
                                         }
@@ -545,7 +462,6 @@ function HomePage() {
                             {selectedEmployee.length > 0 &&
                                 selectedEmployee.map((employee) => (
                                     <AllocationByEmp
-                                        options={allocationOptions}
                                         employee={employee}
                                     ></AllocationByEmp>
                                 ))}
@@ -553,7 +469,6 @@ function HomePage() {
                             {selectedProject.length > 0 &&
                                 selectedProject.map((project) => (
                                     <AllocationByProject
-                                        options={allocationOptions}
                                         project={project}
                                     ></AllocationByProject>
                                 ))}
@@ -561,7 +476,6 @@ function HomePage() {
                             {selectedRegion.length > 0 &&
                                 selectedRegion.map((region) => (
                                     <AllocationByRegion
-                                        options={allocationOptions}
                                         region={region}
                                     ></AllocationByRegion>
                                 ))}
