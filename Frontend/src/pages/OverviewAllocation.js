@@ -54,7 +54,7 @@ function HomePage() {
                     </nav>
                 </div>
 
-                {/* <div>
+                <div>
                     <div className="d-flex">
                         <div className="pt-3 ps-1">
                             <Select
@@ -101,7 +101,7 @@ function HomePage() {
                             ></Select>
                         </div>
                     </div>
-                </div> */}
+                </div>
 
                 <div className="card card-body mt-3 pt-3 col">
                     <div className="table-responsive ">
