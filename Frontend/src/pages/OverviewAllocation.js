@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import axios from "axios";
+
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
@@ -17,6 +20,24 @@ const employeeOptions = [
 ];
 
 function HomePage() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:3000/allocations/getEmployeeAllocationByEmp"
+                );
+
+                setData(response.data.result);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <>
             <Header></Header>
@@ -31,119 +52,212 @@ function HomePage() {
                         </ol>
                     </nav>
                 </div>
-                {employeeOptions.map((item) => (
-                    <div className="card card-body mt-3 pt-3 col">
-                        {/* <h5 className="card-title text-center fs-4">
-                            {item.label}
-                        </h5> */}
-                        <table className="table caption-top">
+
+                <div>
+                    <div className="d-flex">
+                        <div className="pt-3 ps-1">
+                            <Select
+                                placeholder={
+                                    <span className="bi bi-person-check">
+                                        {"  "}Filter by...
+                                    </span>
+                                }
+                                options={employeeOptions}
+                                isMulti
+                            ></Select>
+                        </div>
+                        <div className="pt-3 ps-1">
+                            <Select
+                                placeholder={
+                                    <span className="bi bi-person-check">
+                                        {"  "}Filter by...
+                                    </span>
+                                }
+                                options={employeeOptions}
+                                isMulti
+                            ></Select>
+                        </div>
+                        <div className="pt-3 ps-1">
+                            <Select
+                                placeholder={
+                                    <span className="bi bi-person-check">
+                                        {"  "}Filter by...
+                                    </span>
+                                }
+                                options={employeeOptions}
+                                isMulti
+                            ></Select>
+                        </div>
+                        <div className="pt-3 ps-1">
+                            <Select
+                                placeholder={
+                                    <span className="bi bi-person-check">
+                                        {"  "}Filter by...
+                                    </span>
+                                }
+                                options={employeeOptions}
+                                isMulti
+                            ></Select>
+                        </div>
+                    </div>
+                </div>
+                <div className="card card-body mt-3 pt-3 col">
+                    <div className="table-responsive">
+                        <table className="table caption-top table table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th>Employee</th>
-                                    <th>WN-28</th>
-                                    <th>WN-29</th>
-                                    <th>WN-30</th>
-                                    <th>WN-31</th>
-                                    <th>WN-32</th>
+                                    <th></th>
+
+                                    {Array.from({ length: 52 }, (_, index) => (
+                                        <th>{`W${index + 1}`}</th>
+                                    ))}
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row" className="text-muted">
-                                        Leave
-                                    </th>
-                                    <td>
-                                        <span className="badge bg-info"></span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-info">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-info">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-info">
-                                            0 %
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="text-muted">
-                                        Public Holiday
-                                    </th>
-                                    <td>
-                                        <span className="badge bg-danger"></span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-danger">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-danger">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-danger">
-                                            0 %
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="text-muted">
-                                        Total Allocations
-                                    </th>
-                                    <td>
-                                        <span className="badge bg-success"></span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-success">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-success">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-success">
-                                            0 %
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" className="text-muted">
-                                        Availble Allocations
-                                    </th>
-                                    <td>
-                                        <span className="badge bg-success"></span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-warning text-dark">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-warning text-dark">
-                                            0 %
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="badge bg-warning text-dark">
-                                            0 %
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            {data.map((emp) => (
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{emp.emp_name}</th>
+                                        <th scope="row" className="text-muted">
+                                            Leave
+                                        </th>
+                                        {Array.from(
+                                            { length: 52 },
+                                            (_, index) => {
+                                                const weekData =
+                                                    emp.details.find(
+                                                        (i) =>
+                                                            i.week_no ===
+                                                            index + 1
+                                                    );
+                                                return (
+                                                    <td>
+                                                        <span>
+                                                            {weekData
+                                                                ? weekData.leave
+                                                                : ""}
+                                                        </span>
+                                                    </td>
+                                                );
+                                            }
+                                        )}
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <th scope="row" className="text-muted">
+                                            Public Holiday
+                                        </th>
+                                        {Array.from(
+                                            { length: 52 },
+                                            (_, index) => {
+                                                const weekData =
+                                                    emp.details.find(
+                                                        (i) =>
+                                                            i.week_no ===
+                                                            index + 1
+                                                    );
+                                                return (
+                                                    <td>
+                                                        <span>
+                                                            {weekData
+                                                                ? weekData.public_holiday
+                                                                : ""}
+                                                        </span>
+                                                    </td>
+                                                );
+                                            }
+                                        )}
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <th scope="row" className="text-muted">
+                                            Vacation
+                                        </th>
+                                        {Array.from(
+                                            { length: 52 },
+                                            (_, index) => {
+                                                const weekData =
+                                                    emp.details.find(
+                                                        (i) =>
+                                                            i.week_no ===
+                                                            index + 1
+                                                    );
+                                                return (
+                                                    <td>
+                                                        <span>
+                                                            {weekData
+                                                                ? weekData.vacation
+                                                                : ""}
+                                                        </span>
+                                                    </td>
+                                                );
+                                            }
+                                        )}
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <th scope="row" className="text-muted">
+                                            Sum %
+                                        </th>
+                                        {Array.from(
+                                            { length: 52 },
+                                            (_, index) => {
+                                                const weekData =
+                                                    emp.details.find(
+                                                        (i) =>
+                                                            i.week_no ===
+                                                            index + 1
+                                                    );
+                                                return (
+                                                    <td>
+                                                        <span>
+                                                            {weekData
+                                                                ? weekData.sum
+                                                                : ""}
+                                                        </span>
+                                                    </td>
+                                                );
+                                            }
+                                        )}
+                                        {/* {emp.details.map((i) => (
+                                            <td>
+                                                <span className="badge bg-warning text-dark">
+                                                    {i.sum}
+                                                </span>
+                                            </td>
+                                        ))} */}
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <th scope="row" className="text-muted">
+                                            Available %
+                                        </th>
+                                        {Array.from(
+                                            { length: 52 },
+                                            (_, index) => {
+                                                const weekData =
+                                                    emp.details.find(
+                                                        (i) =>
+                                                            i.week_no ===
+                                                            index + 1
+                                                    );
+                                                return (
+                                                    <td>
+                                                        <span>
+                                                            {weekData
+                                                                ? weekData.available
+                                                                : ""}
+                                                        </span>
+                                                    </td>
+                                                );
+                                            }
+                                        )}
+                                    </tr>
+                                </tbody>
+                            ))}
                         </table>
                     </div>
-                ))}
+                </div>
             </main>
 
             <Footer></Footer>
