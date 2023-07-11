@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import EmployeePage from "./pages/EmployeePage";
+import OverviewAllocationPage from "./pages/OverviewAllocation";
 import "./App.css";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/main" element={<HomePage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/employee" element={<EmployeePage />} />
+                <Route path="/overview" element={<OverviewAllocationPage />} />
             </Routes>
         </Router>
     );

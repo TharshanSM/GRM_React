@@ -43,7 +43,7 @@ const EmployeePage = () => {
                     <div>
                         <Select
                             placeholder={
-                                <span class="bi bi-person-check">
+                                <span className="bi bi-person-check">
                                     {"  "}Filter by Employee...
                                 </span>
                             }

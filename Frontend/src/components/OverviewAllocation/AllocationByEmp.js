@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function AllocationByEmp({ options, employee }) {
+function AllocationByEmp({ employee }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/allocations/getAllocationDetailsByEmpID/${employee.value}`
+                    `http://localhost:3000/allocations/getDetailsByEmpName/${employee.label}/28`
                 );
-                setData(response.data.result);
+
+                setData(response.data.result[0].allocation_details);
             } catch (error) {
                 console.log(error);
             }
@@ -18,7 +19,7 @@ function AllocationByEmp({ options, employee }) {
 
         fetchData();
     }, [employee]);
-
+    // console.log(data);
     return (
         <>
             <div className="card card-body mt-3 pt-3 col">
@@ -30,23 +31,19 @@ function AllocationByEmp({ options, employee }) {
                         <tr>
                             <th>Project</th>
                             <th>Roles</th>
-                            <th>W-01</th>
-                            <th>W-02</th>
-                            <th>W-03</th>
-                            <th>W-04</th>
-                            <th>W-05</th>
+                            <th>WN28 / 23-07-10</th>
+                            <th>WN29 / 23-07-17</th>
+                            <th>WN30 / 23-07-24</th>
+                            <th>WN31 / 23-07-31</th>
+                            <th>WN32 / 23-08-07</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((item) => (
                             <tr>
-                                <th scope="row">{item.Project}</th>
-                                <th>{item.Roles}</th>
-                                <th>{item.Week01}</th>
-                                <th>{item.Week02}</th>
-                                <th>{item.Week03}</th>
-                                <th>{item.Week04}</th>
-                                <th>{item.Week05}</th>
+                                <th scope="row">{item.customer}</th>
+                                <th>{item.role}</th>
+                                <th>{item.allocation}</th>
                             </tr>
                         ))}
                         <tr>
@@ -102,7 +99,7 @@ function AllocationByEmp({ options, employee }) {
                         </tr>
                         <tr>
                             <th scope="row" className="text-muted">
-                                Availble Allocations What is hosting
+                                Availble Allocations
                             </th>
                             <td>
                                 <span className="badge bg-success"></span>
