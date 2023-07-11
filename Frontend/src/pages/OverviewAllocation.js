@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 
+import "../Main.css";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
@@ -53,7 +54,7 @@ function HomePage() {
                     </nav>
                 </div>
 
-                <div>
+                {/* <div>
                     <div className="d-flex">
                         <div className="pt-3 ps-1">
                             <Select
@@ -100,17 +101,25 @@ function HomePage() {
                             ></Select>
                         </div>
                     </div>
-                </div>
+                </div> */}
+
                 <div className="card card-body mt-3 pt-3 col">
-                    <div className="table-responsive">
-                        <table className="table caption-top table table-hover table-bordered">
+                    <div className="table-responsive ">
+                        <table className="table caption-top table table-hover table-bordered table-nowrap">
+                            <colgroup>
+                                <col />
+                                <col />
+                                {Array.from({ length: 52 }, (_, index) => (
+                                    <col key={index} />
+                                ))}
+                            </colgroup>
                             <thead>
                                 <tr>
                                     <th>Employee</th>
                                     <th></th>
 
                                     {Array.from({ length: 52 }, (_, index) => (
-                                        <th>{`W${index + 1}`}</th>
+                                        <th> {`W${index + 1}`}</th>
                                     ))}
                                 </tr>
                             </thead>
@@ -118,7 +127,7 @@ function HomePage() {
                                 <tbody>
                                     <tr>
                                         <th scope="row">{emp.emp_name}</th>
-                                        <th scope="row" className="text-muted">
+                                        <th scope="row" className="text-muted ">
                                             Leave
                                         </th>
                                         {Array.from(
@@ -132,19 +141,21 @@ function HomePage() {
                                                     );
                                                 return (
                                                     <td>
-                                                        <span>
-                                                            {weekData
-                                                                ? weekData.leave
-                                                                : ""}
-                                                        </span>
+                                                        {weekData ? (
+                                                            <span className="badge bg-secondary ">
+                                                                {weekData.leave}
+                                                            </span>
+                                                        ) : (
+                                                            <span></span>
+                                                        )}
                                                     </td>
                                                 );
                                             }
                                         )}
                                     </tr>
                                     <tr>
-                                        <th scope="row"></th>
-                                        <th scope="row" className="text-muted">
+                                        <th scope="row" />
+                                        <th scope="row" className="text-muted ">
                                             Public Holiday
                                         </th>
                                         {Array.from(
@@ -158,19 +169,23 @@ function HomePage() {
                                                     );
                                                 return (
                                                     <td>
-                                                        <span>
-                                                            {weekData
-                                                                ? weekData.public_holiday
-                                                                : ""}
-                                                        </span>
+                                                        {weekData ? (
+                                                            <span className="badge bg-secondary ">
+                                                                {
+                                                                    weekData.public_holiday
+                                                                }
+                                                            </span>
+                                                        ) : (
+                                                            <span></span>
+                                                        )}
                                                     </td>
                                                 );
                                             }
                                         )}
                                     </tr>
                                     <tr>
-                                        <th scope="row"></th>
-                                        <th scope="row" className="text-muted">
+                                        <th scope="row" />
+                                        <th scope="row" className="text-muted ">
                                             Vacation
                                         </th>
                                         {Array.from(
@@ -184,18 +199,22 @@ function HomePage() {
                                                     );
                                                 return (
                                                     <td>
-                                                        <span>
-                                                            {weekData
-                                                                ? weekData.vacation
-                                                                : ""}
-                                                        </span>
+                                                        {weekData ? (
+                                                            <span className="badge bg-secondary ">
+                                                                {
+                                                                    weekData.vacation
+                                                                }
+                                                            </span>
+                                                        ) : (
+                                                            <span></span>
+                                                        )}
                                                     </td>
                                                 );
                                             }
                                         )}
                                     </tr>
                                     <tr>
-                                        <th scope="row"></th>
+                                        <th scope="row" />
                                         <th scope="row" className="text-muted">
                                             Sum %
                                         </th>
@@ -209,27 +228,22 @@ function HomePage() {
                                                             index + 1
                                                     );
                                                 return (
-                                                    <td>
-                                                        <span>
-                                                            {weekData
-                                                                ? weekData.sum
-                                                                : ""}
-                                                        </span>
+                                                    <td class="table-secondary">
+                                                        {weekData ? (
+                                                            <span className="badge bg-success ">
+                                                                {weekData.sum}
+                                                            </span>
+                                                        ) : (
+                                                            <span></span>
+                                                        )}
                                                     </td>
                                                 );
                                             }
                                         )}
-                                        {/* {emp.details.map((i) => (
-                                            <td>
-                                                <span className="badge bg-warning text-dark">
-                                                    {i.sum}
-                                                </span>
-                                            </td>
-                                        ))} */}
                                     </tr>
                                     <tr>
-                                        <th scope="row"></th>
-                                        <th scope="row" className="text-muted">
+                                        <th scope="row" />
+                                        <th scope="row" className="text-muted ">
                                             Available %
                                         </th>
                                         {Array.from(
@@ -242,12 +256,16 @@ function HomePage() {
                                                             index + 1
                                                     );
                                                 return (
-                                                    <td>
-                                                        <span>
-                                                            {weekData
-                                                                ? weekData.available
-                                                                : ""}
-                                                        </span>
+                                                    <td class="table-primary">
+                                                        {weekData ? (
+                                                            <span className="badge bg-primary ">
+                                                                {
+                                                                    weekData.available
+                                                                }
+                                                            </span>
+                                                        ) : (
+                                                            <span></span>
+                                                        )}
                                                     </td>
                                                 );
                                             }
