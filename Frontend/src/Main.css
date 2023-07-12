@@ -1,4 +1,13 @@
-.table-nowrap,
 table {
     white-space: nowrap;
+}
+
+.exception {
+    position: sticky;
+    left: 0;
+}
+
+.second {
+    position: sticky;
+    left: 140px;
 }
