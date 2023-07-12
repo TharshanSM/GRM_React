@@ -7,17 +7,15 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 
-const employeeOptions = [
-    { value: 1, label: "John Smith" },
-    { value: 2, label: "Donald OConnell" },
-    { value: 3, label: "Jennifer Whalen" },
-    { value: 4, label: "Michael Hartstein" },
-    { value: 5, label: "Pat Fay" },
-    { value: 6, label: "Susan Mavris" },
-    { value: 7, label: "Hermann Baer" },
-    { value: 8, label: "Shelley Higgins" },
-    { value: 9, label: "William Gietz" },
-    { value: 10, label: "Steven King" },
+const regionOptions = [
+    {
+        value: 1,
+        label: "Asia Pacific & Middle East",
+    },
+    {
+        value: 2,
+        label: "Nordics",
+    },
 ];
 
 function HomePage() {
@@ -59,44 +57,11 @@ function HomePage() {
                         <div className="pt-3 ps-1">
                             <Select
                                 placeholder={
-                                    <span className="bi bi-person-check">
-                                        {"  "}Filter by...
+                                    <span className="bi bi-compass-fill">
+                                        {"  "}Filter by Region.....
                                     </span>
                                 }
-                                options={employeeOptions}
-                                isMulti
-                            ></Select>
-                        </div>
-                        <div className="pt-3 ps-1">
-                            <Select
-                                placeholder={
-                                    <span className="bi bi-person-check">
-                                        {"  "}Filter by...
-                                    </span>
-                                }
-                                options={employeeOptions}
-                                isMulti
-                            ></Select>
-                        </div>
-                        <div className="pt-3 ps-1">
-                            <Select
-                                placeholder={
-                                    <span className="bi bi-person-check">
-                                        {"  "}Filter by...
-                                    </span>
-                                }
-                                options={employeeOptions}
-                                isMulti
-                            ></Select>
-                        </div>
-                        <div className="pt-3 ps-1">
-                            <Select
-                                placeholder={
-                                    <span className="bi bi-person-check">
-                                        {"  "}Filter by...
-                                    </span>
-                                }
-                                options={employeeOptions}
+                                options={regionOptions}
                                 isMulti
                             ></Select>
                         </div>
@@ -105,30 +70,42 @@ function HomePage() {
 
                 <div className="card card-body mt-3 pt-3 col">
                     <div className="table-responsive ">
-                        <table className="table caption-top table table-hover table-bordered table-nowrap">
-                            <colgroup>
-                                <col />
-                                <col />
-                                {Array.from({ length: 52 }, (_, index) => (
-                                    <col key={index} />
-                                ))}
-                            </colgroup>
+                        <table className="table caption-top table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Employee</th>
-                                    <th></th>
-
+                                    <th
+                                        colSpan={2}
+                                        className="text-center table-light exception"
+                                    >
+                                        Employee
+                                    </th>
                                     {Array.from({ length: 52 }, (_, index) => (
-                                        <th> {`W${index + 1}`}</th>
+                                        <th>
+                                            {`W${(index + 1)
+                                                .toString()
+                                                .padStart(2, "0")}`}
+                                        </th>
                                     ))}
                                 </tr>
                             </thead>
-                            {data.map((emp) => (
+                            {data.map((emp, index) => (
                                 <tbody>
                                     <tr>
-                                        <th scope="row">{emp.emp_name}</th>
-                                        <th scope="row" className="text-muted ">
-                                            Leave
+                                        <th
+                                            scope="row"
+                                            rowSpan={4}
+                                            className="table-light align-middle exception"
+                                        >
+                                            {emp.emp_name}
+                                            <p className="text-muted">
+                                                <em>LK / {index + 1}</em>
+                                            </p>
+                                        </th>
+                                        <th
+                                            scope="row"
+                                            className="text-muted second table-light"
+                                        >
+                                            Sum %
                                         </th>
                                         {Array.from(
                                             { length: 52 },
@@ -142,7 +119,34 @@ function HomePage() {
                                                 return (
                                                     <td>
                                                         {weekData ? (
-                                                            <span className="badge bg-secondary ">
+                                                            <span className="badge bg-success ">
+                                                                {weekData.sum}
+                                                            </span>
+                                                        ) : (
+                                                            <span></span>
+                                                        )}
+                                                    </td>
+                                                );
+                                            }
+                                        )}
+                                    </tr>
+                                    <tr>
+                                        <th className="text-muted second table-light">
+                                            Leave / Vacation
+                                        </th>
+                                        {Array.from(
+                                            { length: 52 },
+                                            (_, index) => {
+                                                const weekData =
+                                                    emp.details.find(
+                                                        (i) =>
+                                                            i.week_no ===
+                                                            index + 1
+                                                    );
+                                                return (
+                                                    <td>
+                                                        {weekData ? (
+                                                            <span className="badge bg-danger ">
                                                                 {weekData.leave}
                                                             </span>
                                                         ) : (
@@ -154,8 +158,7 @@ function HomePage() {
                                         )}
                                     </tr>
                                     <tr>
-                                        <th scope="row" />
-                                        <th scope="row" className="text-muted ">
+                                        <th className="text-muted second table-light">
                                             Public Holiday
                                         </th>
                                         {Array.from(
@@ -170,7 +173,7 @@ function HomePage() {
                                                 return (
                                                     <td>
                                                         {weekData ? (
-                                                            <span className="badge bg-secondary ">
+                                                            <span className="badge bg-warning ">
                                                                 {
                                                                     weekData.public_holiday
                                                                 }
@@ -183,67 +186,9 @@ function HomePage() {
                                             }
                                         )}
                                     </tr>
+
                                     <tr>
-                                        <th scope="row" />
-                                        <th scope="row" className="text-muted ">
-                                            Vacation
-                                        </th>
-                                        {Array.from(
-                                            { length: 52 },
-                                            (_, index) => {
-                                                const weekData =
-                                                    emp.details.find(
-                                                        (i) =>
-                                                            i.week_no ===
-                                                            index + 1
-                                                    );
-                                                return (
-                                                    <td>
-                                                        {weekData ? (
-                                                            <span className="badge bg-secondary ">
-                                                                {
-                                                                    weekData.vacation
-                                                                }
-                                                            </span>
-                                                        ) : (
-                                                            <span></span>
-                                                        )}
-                                                    </td>
-                                                );
-                                            }
-                                        )}
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" />
-                                        <th scope="row" className="text-muted">
-                                            Sum %
-                                        </th>
-                                        {Array.from(
-                                            { length: 52 },
-                                            (_, index) => {
-                                                const weekData =
-                                                    emp.details.find(
-                                                        (i) =>
-                                                            i.week_no ===
-                                                            index + 1
-                                                    );
-                                                return (
-                                                    <td class="table-secondary">
-                                                        {weekData ? (
-                                                            <span className="badge bg-success ">
-                                                                {weekData.sum}
-                                                            </span>
-                                                        ) : (
-                                                            <span></span>
-                                                        )}
-                                                    </td>
-                                                );
-                                            }
-                                        )}
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" />
-                                        <th scope="row" className="text-muted ">
+                                        <th className="text-muted second table-light">
                                             Available %
                                         </th>
                                         {Array.from(
@@ -256,7 +201,7 @@ function HomePage() {
                                                             index + 1
                                                     );
                                                 return (
-                                                    <td class="table-primary">
+                                                    <td>
                                                         {weekData ? (
                                                             <span className="badge bg-primary ">
                                                                 {
