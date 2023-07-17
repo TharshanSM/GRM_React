@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const sql = require("mssql");
-const dbconfig = require("../dbconfig");
+//const dbconfig = require("../dbconfig");
 const User = require("../models/userModel");
 
+/*
 // Get All Employee
 router.get("/get", async (req, res) => {
     const query =
@@ -34,6 +35,7 @@ router.post("/add", async (req, res) => {
         });
     }
 });
+*/
 
 // Testing Purposes
 router.get("/test", async (req, res) => {
