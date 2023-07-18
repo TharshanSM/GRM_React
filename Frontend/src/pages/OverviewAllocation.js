@@ -62,7 +62,6 @@ function HomePage() {
                                     </span>
                                 }
                                 options={regionOptions}
-                                isMulti
                             ></Select>
                         </div>
                     </div>
@@ -119,9 +118,16 @@ function HomePage() {
                                                 return (
                                                     <td>
                                                         {weekData ? (
-                                                            <span className="badge bg-success ">
-                                                                {weekData.sum}
-                                                            </span>
+                                                            <>
+                                                                <span
+                                                                    className="badge bg-success "
+                                                                    data-tooltip-id="my-tooltip"
+                                                                >
+                                                                    {
+                                                                        weekData.sum
+                                                                    }
+                                                                </span>
+                                                            </>
                                                         ) : (
                                                             <span></span>
                                                         )}
