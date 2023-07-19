@@ -20,6 +20,7 @@ const regionOptions = [
 
 function HomePage() {
     const [data, setData] = useState([]);
+    const [tooltip, setTooltip] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -118,26 +119,17 @@ function HomePage() {
                                                 return (
                                                     <td>
                                                         {weekData ? (
-                                                            <div>
-                                                                {weekData.allocation_details.map(
-                                                                    (x) => (
-                                                                        <span
-                                                                            className="badge bg-success me-2"
-                                                                            title={`Project : ${x.customer}\nAllocation : ${x.allocation}`}
-                                                                        >
-                                                                            {
-                                                                                x.allocation
-                                                                            }
-                                                                            {
-                                                                                " / "
-                                                                            }
-                                                                            {
-                                                                                weekData.sum
-                                                                            }
-                                                                        </span>
+                                                            <span
+                                                                className="badge bg-success me-1"
+                                                                title={weekData.allocation_details
+                                                                    .map(
+                                                                        (x) =>
+                                                                            `${x.customer} - Allocation : ${x.allocation}`
                                                                     )
-                                                                )}
-                                                            </div>
+                                                                    .join("\n")}
+                                                            >
+                                                                {weekData.sum}
+                                                            </span>
                                                         ) : (
                                                             <span></span>
                                                         )}
