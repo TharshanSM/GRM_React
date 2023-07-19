@@ -20,7 +20,6 @@ const regionOptions = [
 
 function HomePage() {
     const [data, setData] = useState([]);
-    const [tooltip, setTooltip] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -124,7 +123,7 @@ function HomePage() {
                                                                 title={weekData.allocation_details
                                                                     .map(
                                                                         (x) =>
-                                                                            `${x.customer} - Allocation : ${x.allocation}`
+                                                                            `${x.customer} - Allocation : ${x.allocation} `
                                                                     )
                                                                     .join("\n")}
                                                             >
