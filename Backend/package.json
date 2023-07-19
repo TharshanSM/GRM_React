@@ -21,6 +21,7 @@
     "morgan": "~1.9.1",
     "mssql": "^9.0.1",
     "nodemon": "^2.0.20",
-    "oracledb": "^6.0.0"
+    "oracledb": "^6.0.0",
+    "react-tooltip": "^5.18.0"
   }
 }

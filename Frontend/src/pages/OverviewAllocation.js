@@ -62,7 +62,6 @@ function HomePage() {
                                     </span>
                                 }
                                 options={regionOptions}
-                                isMulti
                             ></Select>
                         </div>
                     </div>
@@ -119,9 +118,26 @@ function HomePage() {
                                                 return (
                                                     <td>
                                                         {weekData ? (
-                                                            <span className="badge bg-success ">
-                                                                {weekData.sum}
-                                                            </span>
+                                                            <div>
+                                                                {weekData.allocation_details.map(
+                                                                    (x) => (
+                                                                        <span
+                                                                            className="badge bg-success me-2"
+                                                                            title={`Project : ${x.customer}\nAllocation : ${x.allocation}`}
+                                                                        >
+                                                                            {
+                                                                                x.allocation
+                                                                            }
+                                                                            {
+                                                                                " / "
+                                                                            }
+                                                                            {
+                                                                                weekData.sum
+                                                                            }
+                                                                        </span>
+                                                                    )
+                                                                )}
+                                                            </div>
                                                         ) : (
                                                             <span></span>
                                                         )}
