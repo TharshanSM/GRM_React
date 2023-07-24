@@ -35,6 +35,7 @@ function HomePage() {
     const [data, setData] = useState([]);
     const [startWeek, SetStartWeek] = useState(28);
     const [buttonLabel, setButtonLabel] = useState("View History");
+    //const [isClearable, setIsClearable] = useState(true);
     const totalWeeks = 52;
     const length = totalWeeks - startWeek + 1;
 
@@ -119,7 +120,6 @@ function HomePage() {
                                     </span>
                                 }
                                 options={projectOptions}
-                                onChange={handleChangeProject}
                             ></Select>
                         </div>
                     </div>
