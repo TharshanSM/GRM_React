@@ -7,6 +7,19 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 
+const projectOptions = [
+    { value: 1, label: "Project A" },
+    { value: 2, label: "Project B" },
+    { value: 3, label: "Project C" },
+    { value: 4, label: "Project D" },
+    { value: 5, label: "Project E" },
+    { value: 6, label: "Project F" },
+    { value: 7, label: "Singer Sri Lanka" },
+    { value: 8, label: "Woerly" },
+    { value: 9, label: "VBG" },
+    { value: 10, label: "Beyond Gravity " },
+];
+
 const regionOptions = [
     {
         value: 1,
@@ -51,6 +64,24 @@ function HomePage() {
         }
     };
 
+    const handleChangeProject = async (project) => {
+        console.log(project.label);
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/allocations/getEmployeeAllocationByEmpProj",
+                {
+                    params: {
+                        proj: project.label,
+                    },
+                }
+            );
+
+            setData(response.data.result);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <Header></Header>
@@ -70,12 +101,25 @@ function HomePage() {
                     <div className="d-flex">
                         <div className="pt-3 ps-1">
                             <Select
+                                isClearable={true}
                                 placeholder={
                                     <span className="bi bi-compass-fill">
                                         {"  "}Filter by Region.....
                                     </span>
                                 }
                                 options={regionOptions}
+                            ></Select>
+                        </div>
+                        <div className="pt-3 ps-1">
+                            <Select
+                                isClearable={true}
+                                placeholder={
+                                    <span className="bi bi-distribute-vertical">
+                                        {"  "}Filter by Project.....
+                                    </span>
+                                }
+                                options={projectOptions}
+                                onChange={handleChangeProject}
                             ></Select>
                         </div>
                     </div>
