@@ -20,6 +20,10 @@ const regionOptions = [
 
 function HomePage() {
     const [data, setData] = useState([]);
+    const [startWeek, SetStartWeek] = useState(28);
+    const [buttonLabel, setButtonLabel] = useState("View History");
+    const totalWeeks = 52;
+    const length = totalWeeks - startWeek + 1;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +40,16 @@ function HomePage() {
 
         fetchData();
     }, []);
+
+    const handleButtonClick = () => {
+        if (buttonLabel === "View History") {
+            setButtonLabel("Current Week");
+            SetStartWeek(1);
+        } else {
+            setButtonLabel("View History");
+            SetStartWeek(28);
+        }
+    };
 
     return (
         <>
@@ -78,13 +92,16 @@ function HomePage() {
                                     >
                                         Employee
                                     </th>
-                                    {Array.from({ length: 52 }, (_, index) => (
-                                        <th>
-                                            {`W${(index + 1)
-                                                .toString()
-                                                .padStart(2, "0")}`}
-                                        </th>
-                                    ))}
+                                    {Array.from(
+                                        { length: length },
+                                        (_, index) => (
+                                            <th>
+                                                {`W${(startWeek + index)
+                                                    .toString()
+                                                    .padStart(2, "0")}`}
+                                            </th>
+                                        )
+                                    )}
                                 </tr>
                             </thead>
                             {data.map((emp, index) => (
@@ -107,13 +124,13 @@ function HomePage() {
                                             Sum %
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -142,13 +159,13 @@ function HomePage() {
                                             Leave / Vacation
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -169,13 +186,13 @@ function HomePage() {
                                             Public Holiday
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -199,13 +216,13 @@ function HomePage() {
                                             Available %
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -227,6 +244,21 @@ function HomePage() {
                             ))}
                         </table>
                     </div>
+                </div>
+
+                <div className="d-flex justify-content-end">
+                    <button
+                        type="button"
+                        className={`btn btn-outline-primary ${
+                            buttonLabel === "View History" ? "" : "active"
+                        }`}
+                        onClick={handleButtonClick}
+                    >
+                        <span className="bi bi-clock-history">
+                            {" "}
+                            {buttonLabel}
+                        </span>
+                    </button>
                 </div>
             </main>
 
