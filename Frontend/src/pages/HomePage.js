@@ -219,7 +219,7 @@ function HomePage() {
         setSelectedRegion(selectedOption);
     };
     return (
-        <>
+        <body>
             <Header></Header>
             <Sidebar active="main"></Sidebar>
             <main id="main" className="main">
@@ -473,7 +473,7 @@ function HomePage() {
                 </div>
             </main>
             <Footer></Footer>
-        </>
+        </body>
     );
 }
 

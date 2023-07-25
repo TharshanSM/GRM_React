@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
+    //const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     return (
         <header
             id="header"
@@ -12,9 +14,14 @@ function Header() {
                     <img src="/logo.png" alt="" />
                     <span className="d-none d-lg-block">GRM</span>
                 </a>
-                <i className="bi bi-list toggle-sidebar-btn" />
+                <i
+                    className="bi bi-list toggle-sidebar-btn"
+                    // onClick={() => {
+                    //     setIsSidebarOpen((isSidebarOpen) => !isSidebarOpen);
+                    // }}
+                />
             </div>
-            {/* End Logo */}
+
             <div className="search-bar">
                 <form
                     className="search-form d-flex align-items-center"
@@ -32,7 +39,7 @@ function Header() {
                     </button>
                 </form>
             </div>
-            {/* End Search Bar */}
+
             <nav className="header-nav ms-auto">
                 <ul className="d-flex align-items-center">
                     <li className="nav-item d-block d-lg-none">
@@ -43,7 +50,7 @@ function Header() {
                             <i className="bi bi-search" />
                         </a>
                     </li>
-                    {/* End Search Icon*/}
+
                     <li className="nav-item dropdown">
                         <a
                             className="nav-link nav-icon"
@@ -55,7 +62,7 @@ function Header() {
                                 4
                             </span>{" "}
                         </a>
-                        {/* End Notification Icon */}
+
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                             <li className="dropdown-header">
                                 You have 4 new notifications
@@ -118,9 +125,8 @@ function Header() {
                                 </a>
                             </li>
                         </ul>
-                        {/* End Notification Dropdown Items */}
                     </li>
-                    {/* End Notification Nav */}
+
                     <li className="nav-item dropdown">
                         <a
                             className="nav-link nav-icon"
@@ -132,7 +138,7 @@ function Header() {
                                 3
                             </span>{" "}
                         </a>
-                        {/* End Messages Icon */}
+
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                             <li className="dropdown-header">
                                 You have 3 new messages
@@ -211,9 +217,8 @@ function Header() {
                                 </a>
                             </li>
                         </ul>
-                        {/* End Messages Dropdown Items */}
                     </li>
-                    {/* End Messages Nav */}
+
                     <li className="nav-item dropdown pe-3">
                         <a
                             className="nav-link nav-profile d-flex align-items-center pe-0"
@@ -229,7 +234,7 @@ function Header() {
                                 CM
                             </span>{" "}
                         </a>
-                        {/* End Profile Iamge Icon */}
+
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li className="dropdown-header">
                                 <h6>Consulting Manager</h6>
@@ -258,12 +263,9 @@ function Header() {
                                 </Link>
                             </li>
                         </ul>
-                        {/* End Profile Dropdown Items */}
                     </li>
-                    {/* End Profile Nav */}
                 </ul>
             </nav>
-            {/* End Icons Navigation */}
         </header>
     );
 }

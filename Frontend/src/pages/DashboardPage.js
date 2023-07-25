@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 const DashboardPage = () => {
     return (
-        <>
+        <body>
             <Header></Header>
             <Sidebar active="dashboard"></Sidebar>
             <main id="main" className="main">
@@ -24,7 +24,7 @@ const DashboardPage = () => {
                 </div>
             </main>
             <Footer></Footer>
-        </>
+        </body>
     );
 };
 

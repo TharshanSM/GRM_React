@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
+
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import EmployeePage from "./pages/EmployeePage";
-import OverviewAllocationPage from "./pages/OverviewAllocation";
-import "./App.css";
+import OverviewAllocationPage from "./pages/OverviewAllocationPage";
 
 const App = () => {
     return (

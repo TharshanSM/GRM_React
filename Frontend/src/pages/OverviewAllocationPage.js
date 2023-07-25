@@ -31,7 +31,7 @@ const regionOptions = [
     },
 ];
 
-function HomePage() {
+function OverviewAllocationPage() {
     const [data, setData] = useState([]);
     const [startWeek, SetStartWeek] = useState(28);
     const [buttonLabel, setButtonLabel] = useState("View History");
@@ -85,7 +85,7 @@ function HomePage() {
     };
 
     return (
-        <>
+        <body>
             <Header></Header>
             <Sidebar active="overview"></Sidebar>
             <main id="main" className="main">
@@ -309,8 +309,8 @@ function HomePage() {
             </main>
 
             <Footer></Footer>
-        </>
+        </body>
     );
 }
 
-export default HomePage;
+export default OverviewAllocationPage;
