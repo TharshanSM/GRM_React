@@ -7,6 +7,19 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 
+const projectOptions = [
+    { value: 1, label: "Project A" },
+    { value: 2, label: "Project B" },
+    { value: 3, label: "Project C" },
+    { value: 4, label: "Project D" },
+    { value: 5, label: "Project E" },
+    { value: 6, label: "Project F" },
+    { value: 7, label: "Singer Sri Lanka" },
+    { value: 8, label: "Woerly" },
+    { value: 9, label: "VBG" },
+    { value: 10, label: "Beyond Gravity " },
+];
+
 const regionOptions = [
     {
         value: 1,
@@ -20,6 +33,11 @@ const regionOptions = [
 
 function HomePage() {
     const [data, setData] = useState([]);
+    const [startWeek, SetStartWeek] = useState(28);
+    const [buttonLabel, setButtonLabel] = useState("View History");
+    //const [isClearable, setIsClearable] = useState(true);
+    const totalWeeks = 52;
+    const length = totalWeeks - startWeek + 1;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +54,34 @@ function HomePage() {
 
         fetchData();
     }, []);
+
+    const handleButtonClick = () => {
+        if (buttonLabel === "View History") {
+            setButtonLabel("Current Week");
+            SetStartWeek(1);
+        } else {
+            setButtonLabel("View History");
+            SetStartWeek(28);
+        }
+    };
+
+    const handleChangeProject = async (project) => {
+        console.log(project.label);
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/allocations/getEmployeeAllocationByEmpProj",
+                {
+                    params: {
+                        proj: project.label,
+                    },
+                }
+            );
+
+            setData(response.data.result);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <>
@@ -56,12 +102,25 @@ function HomePage() {
                     <div className="d-flex">
                         <div className="pt-3 ps-1">
                             <Select
+                                isClearable={true}
                                 placeholder={
                                     <span className="bi bi-compass-fill">
                                         {"  "}Filter by Region.....
                                     </span>
                                 }
                                 options={regionOptions}
+                            ></Select>
+                        </div>
+                        <div className="pt-3 ps-1">
+                            <Select
+                                isClearable={true}
+                                placeholder={
+                                    <span className="bi bi-distribute-vertical">
+                                        {"  "}Filter by Project.....
+                                    </span>
+                                }
+                                options={projectOptions}
+                                onChange={handleChangeProject}
                             ></Select>
                         </div>
                     </div>
@@ -78,13 +137,16 @@ function HomePage() {
                                     >
                                         Employee
                                     </th>
-                                    {Array.from({ length: 52 }, (_, index) => (
-                                        <th>
-                                            {`W${(index + 1)
-                                                .toString()
-                                                .padStart(2, "0")}`}
-                                        </th>
-                                    ))}
+                                    {Array.from(
+                                        { length: length },
+                                        (_, index) => (
+                                            <th>
+                                                {`W${(startWeek + index)
+                                                    .toString()
+                                                    .padStart(2, "0")}`}
+                                            </th>
+                                        )
+                                    )}
                                 </tr>
                             </thead>
                             {data.map((emp, index) => (
@@ -107,13 +169,13 @@ function HomePage() {
                                             Sum %
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -142,13 +204,13 @@ function HomePage() {
                                             Leave / Vacation
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -169,13 +231,13 @@ function HomePage() {
                                             Public Holiday
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -199,13 +261,13 @@ function HomePage() {
                                             Available %
                                         </th>
                                         {Array.from(
-                                            { length: 52 },
+                                            { length: length },
                                             (_, index) => {
                                                 const weekData =
                                                     emp.details.find(
                                                         (i) =>
                                                             i.week_no ===
-                                                            index + 1
+                                                            startWeek + index
                                                     );
                                                 return (
                                                     <td>
@@ -227,6 +289,21 @@ function HomePage() {
                             ))}
                         </table>
                     </div>
+                </div>
+
+                <div className="d-flex justify-content-end">
+                    <button
+                        type="button"
+                        className={`btn btn-outline-primary ${
+                            buttonLabel === "View History" ? "" : "active"
+                        }`}
+                        onClick={handleButtonClick}
+                    >
+                        <span className="bi bi-clock-history">
+                            {" "}
+                            {buttonLabel}
+                        </span>
+                    </button>
                 </div>
             </main>
 

@@ -114,39 +114,6 @@ const monthOptions = [
     { value: 12, label: "December" },
 ];
 
-const buttons = [
-    {
-        label: "Allocate",
-        icon: "bi bi-plus-circle",
-        target: "collapseExample",
-    },
-    {
-        label: "Overview Schedule",
-        icon: "bi bi-view-stacked",
-        target: "collapseExample1",
-    },
-];
-
-const ButtonGroup = () => {
-    return (
-        <>
-            {buttons.map(({ label, icon, target }) => (
-                <a
-                    key={label}
-                    className="btn btn-outline-primary me-1"
-                    data-bs-toggle="collapse"
-                    href={`#${target}`}
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls={target}
-                >
-                    <i className={icon} /> {label}
-                </a>
-            ))}
-        </>
-    );
-};
-
 function HomePage() {
     const [employees, setEmployees] = useState([]);
     const [project, setProject] = useState(null);
@@ -270,7 +237,29 @@ function HomePage() {
                 <div className="row">
                     <div className="col">
                         <div>
-                            <ButtonGroup></ButtonGroup>
+                            <a
+                                key="Allocate"
+                                className="btn btn-outline-primary me-1"
+                                data-bs-toggle="collapse"
+                                href="#collapseExample"
+                                role="button"
+                                aria-expanded="false"
+                                aria-controls="collapseExample"
+                            >
+                                <i className="bi bi-plus-circle" /> Allocate
+                            </a>
+                            <a
+                                key="Overview Schedule"
+                                className="btn btn-outline-primary me-1"
+                                data-bs-toggle="collapse"
+                                href="#collapseExample1"
+                                role="button"
+                                aria-expanded="false"
+                                aria-controls="collapseExample1"
+                            >
+                                <i className="bi bi-view-stacked" /> Overview
+                                Schedule
+                            </a>
                         </div>
 
                         <div className="collapse" id="collapseExample">

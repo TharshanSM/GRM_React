@@ -128,3 +128,69 @@ module.exports.getEmployeeAllocationByEmp = async (req, res) => {
         console.error("Failed to retrieve employee details:", error);
     }
 };
+
+module.exports.getEmployeeAllocationByEmpProj = async (req, res) => {
+    const { proj } = req.query;
+    try {
+        const employeeDetails = await EmployeeAllocation.aggregate([
+            {
+                $lookup: {
+                    from: "allocations",
+                    let: { allocation_details: "$allocation_details" },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $and: [
+                                        {
+                                            $eq: ["$customer", proj],
+                                        },
+                                        {
+                                            $in: [
+                                                "$_id",
+                                                "$$allocation_details",
+                                            ],
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                    ],
+                    as: "allocation_details",
+                },
+            },
+            {
+                $group: {
+                    _id: "$emp_name",
+                    emp_name: { $first: "$emp_name" },
+                    cm_group: { $first: "$cm_group" },
+                    details: {
+                        $push: {
+                            week_no: "$week_no",
+                            week_start_date: "$week_start_date",
+                            leave: "$leave",
+                            public_holiday: "$public_holiday",
+                            vacation: "$vacation",
+                            sum: { $sum: "$allocation_details.allocation" },
+                            available: 0,
+                            // available: {
+                            //     $subtract: [
+                            //         100,
+                            //         { $sum: "$allocation_details.allocation" },
+                            //     ],
+                            // },
+                            allocation_details: "$allocation_details",
+                        },
+                    },
+                },
+            },
+        ]);
+
+        res.json({
+            message: "Sucessfull Emp Weekly Data By Project",
+            result: employeeDetails,
+        });
+    } catch (error) {
+        console.error("Failed to retrieve employee details:", error);
+    }
+};
