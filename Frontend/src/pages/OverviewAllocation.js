@@ -120,6 +120,7 @@ function HomePage() {
                                     </span>
                                 }
                                 options={projectOptions}
+                                onChange={handleChangeProject}
                             ></Select>
                         </div>
                     </div>
