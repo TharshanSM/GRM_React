@@ -3,9 +3,9 @@ import Select from "react-select";
 import axios from "axios";
 
 import "../Main.css";
-import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const projectOptions = [
     { value: 1, label: "Project A" },
@@ -37,6 +37,8 @@ function OverviewAllocationPage() {
     const [buttonLabel, setButtonLabel] = useState("View History");
     const totalWeeks = 52;
     const length = totalWeeks - startWeek + 1;
+
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -85,8 +87,28 @@ function OverviewAllocationPage() {
     };
 
     return (
-        <body>
-            <Header></Header>
+        <body className={isSidebarOpen ? "toggle-sidebar" : ""}>
+            <header
+                id="header"
+                className="header fixed-top d-flex align-items-center"
+            >
+                <div className="d-flex align-items-center justify-content-between">
+                    <a
+                        href="index.html"
+                        className="logo d-flex align-items-center"
+                    >
+                        <img src="/logo.png" alt="" />
+                        <span className="d-none d-lg-block">GRM</span>
+                    </a>
+                    <i
+                        className="bi bi-list toggle-sidebar-btn"
+                        onClick={() => {
+                            setIsSidebarOpen((isSidebarOpen) => !isSidebarOpen);
+                        }}
+                    />
+                </div>
+                <Navbar></Navbar>
+            </header>
             <Sidebar active="overview"></Sidebar>
             <main id="main" className="main">
                 <div className="pagetitle">

@@ -1,27 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-function Header() {
-    //const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+const Navbar = () => {
     return (
-        <header
-            id="header"
-            className="header fixed-top d-flex align-items-center"
-        >
-            <div className="d-flex align-items-center justify-content-between">
-                <a href="index.html" className="logo d-flex align-items-center">
-                    <img src="/logo.png" alt="" />
-                    <span className="d-none d-lg-block">GRM</span>
-                </a>
-                <i
-                    className="bi bi-list toggle-sidebar-btn"
-                    // onClick={() => {
-                    //     setIsSidebarOpen((isSidebarOpen) => !isSidebarOpen);
-                    // }}
-                />
-            </div>
-
+        <>
             <div className="search-bar">
                 <form
                     className="search-form d-flex align-items-center"
@@ -154,7 +135,7 @@ function Header() {
                             <li className="message-item">
                                 <a href="http://localhost:3000/index.html">
                                     <img
-                                        src="assets/img/messages-1.jpg"
+                                        src="/messages-1.jpg"
                                         alt=""
                                         className="rounded-circle"
                                     />
@@ -174,7 +155,7 @@ function Header() {
                             <li className="message-item">
                                 <a href="http://localhost:3000/index.html">
                                     <img
-                                        src="assets/img/messages-2.jpg"
+                                        src="/messages-2.jpg"
                                         alt=""
                                         className="rounded-circle"
                                     />
@@ -194,7 +175,7 @@ function Header() {
                             <li className="message-item">
                                 <a href="http://localhost:3000/index.html">
                                     <img
-                                        src="assets/img/messages-3.jpg"
+                                        src="/messages-3.jpg"
                                         alt=""
                                         className="rounded-circle"
                                     />
@@ -253,21 +234,21 @@ function Header() {
                                 </a>
                             </li>
 
-                            <li>
+                            {/* <li>
                                 <Link
-                                    to="/"
+                                    to=""
                                     className="dropdown-item d-flex align-items-center"
                                 >
                                     <i className="bi bi-box-arrow-right" />
                                     <span>Logout</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </li>
                 </ul>
             </nav>
-        </header>
+        </>
     );
-}
+};
 
-export default Header;
+export default Navbar;
