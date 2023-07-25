@@ -17,7 +17,7 @@ const projectOptions = [
     { value: 7, label: "Singer Sri Lanka" },
     { value: 8, label: "Woerly" },
     { value: 9, label: "VBG" },
-    { value: 10, label: "Beyond Gravity " },
+    { value: 10, label: "Beyond Gravity" },
 ];
 
 const regionOptions = [
@@ -35,25 +35,24 @@ function HomePage() {
     const [data, setData] = useState([]);
     const [startWeek, SetStartWeek] = useState(28);
     const [buttonLabel, setButtonLabel] = useState("View History");
-    //const [isClearable, setIsClearable] = useState(true);
     const totalWeeks = 52;
     const length = totalWeeks - startWeek + 1;
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    "http://localhost:3000/allocations/getEmployeeAllocationByEmp"
-                );
-
-                setData(response.data.result);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/allocations/getEmployeeAllocationByEmp"
+            );
+
+            setData(response.data.result);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleButtonClick = () => {
         if (buttonLabel === "View History") {
@@ -66,20 +65,22 @@ function HomePage() {
     };
 
     const handleChangeProject = async (project) => {
-        console.log(project.label);
-        try {
-            const response = await axios.get(
-                "http://localhost:3000/allocations/getEmployeeAllocationByEmpProj",
-                {
-                    params: {
-                        proj: project.label,
-                    },
-                }
-            );
-
-            setData(response.data.result);
-        } catch (error) {
-            console.log(error);
+        if (project && project.label) {
+            try {
+                const response = await axios.get(
+                    "http://localhost:3000/allocations/getEmployeeAllocationByEmpProj",
+                    {
+                        params: {
+                            proj: project.label,
+                        },
+                    }
+                );
+                setData(response.data.result);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            fetchData();
         }
     };
 
