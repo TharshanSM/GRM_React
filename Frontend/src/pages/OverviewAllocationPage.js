@@ -3,9 +3,9 @@ import Select from "react-select";
 import axios from "axios";
 
 import "../Main.css";
-import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const projectOptions = [
     { value: 1, label: "Project A" },
@@ -17,7 +17,7 @@ const projectOptions = [
     { value: 7, label: "Singer Sri Lanka" },
     { value: 8, label: "Woerly" },
     { value: 9, label: "VBG" },
-    { value: 10, label: "Beyond Gravity " },
+    { value: 10, label: "Beyond Gravity" },
 ];
 
 const regionOptions = [
@@ -31,29 +31,30 @@ const regionOptions = [
     },
 ];
 
-function HomePage() {
+function OverviewAllocationPage() {
     const [data, setData] = useState([]);
     const [startWeek, SetStartWeek] = useState(28);
     const [buttonLabel, setButtonLabel] = useState("View History");
-    //const [isClearable, setIsClearable] = useState(true);
     const totalWeeks = 52;
     const length = totalWeeks - startWeek + 1;
 
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    "http://localhost:3000/allocations/getEmployeeAllocationByEmp"
-                );
-
-                setData(response.data.result);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/allocations/getEmployeeAllocationByEmp"
+            );
+
+            setData(response.data.result);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleButtonClick = () => {
         if (buttonLabel === "View History") {
@@ -66,26 +67,48 @@ function HomePage() {
     };
 
     const handleChangeProject = async (project) => {
-        console.log(project.label);
-        try {
-            const response = await axios.get(
-                "http://localhost:3000/allocations/getEmployeeAllocationByEmpProj",
-                {
-                    params: {
-                        proj: project.label,
-                    },
-                }
-            );
-
-            setData(response.data.result);
-        } catch (error) {
-            console.log(error);
+        if (project && project.label) {
+            try {
+                const response = await axios.get(
+                    "http://localhost:3000/allocations/getEmployeeAllocationByEmpProj",
+                    {
+                        params: {
+                            proj: project.label,
+                        },
+                    }
+                );
+                setData(response.data.result);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            fetchData();
         }
     };
 
     return (
-        <>
-            <Header></Header>
+        <body className={isSidebarOpen ? "toggle-sidebar" : ""}>
+            <header
+                id="header"
+                className="header fixed-top d-flex align-items-center"
+            >
+                <div className="d-flex align-items-center justify-content-between">
+                    <a
+                        href="index.html"
+                        className="logo d-flex align-items-center"
+                    >
+                        <img src="/logo.png" alt="" />
+                        <span className="d-none d-lg-block">GRM</span>
+                    </a>
+                    <i
+                        className="bi bi-list toggle-sidebar-btn"
+                        onClick={() => {
+                            setIsSidebarOpen((isSidebarOpen) => !isSidebarOpen);
+                        }}
+                    />
+                </div>
+                <Navbar></Navbar>
+            </header>
             <Sidebar active="overview"></Sidebar>
             <main id="main" className="main">
                 <div className="pagetitle">
@@ -308,8 +331,8 @@ function HomePage() {
             </main>
 
             <Footer></Footer>
-        </>
+        </body>
     );
 }
 
-export default HomePage;
+export default OverviewAllocationPage;
