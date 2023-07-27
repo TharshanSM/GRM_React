@@ -2,6 +2,13 @@ table {
     white-space: nowrap;
 }
 
+.table > thead {
+    vertical-align: bottom;
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+}
+
 .exception {
     position: sticky;
     left: 0;
@@ -10,4 +17,9 @@ table {
 .second {
     position: sticky;
     left: 140px;
+}
+
+.table-responsive {
+    overflow-y: auto;
+    height: 400px;
 }
