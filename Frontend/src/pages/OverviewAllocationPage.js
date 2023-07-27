@@ -154,11 +154,7 @@ function OverviewAllocationPage() {
                         <table className="table caption-top table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th
-                                        colSpan={2}
-                                        className="text-center table-light exception"
-                                        scope="row"
-                                    >
+                                    <th colSpan={2} scope="row">
                                         Employee
                                     </th>
                                     {Array.from(
@@ -205,11 +201,11 @@ function OverviewAllocationPage() {
                                                     <td>
                                                         {weekData ? (
                                                             <span
-                                                                className="badge bg-success me-1"
+                                                                className="badge bg-success me-1 "
                                                                 title={weekData.allocation_details
                                                                     .map(
                                                                         (x) =>
-                                                                            `${x.customer} - Allocation : ${x.allocation} `
+                                                                            `${x.customer} / Allocation : ${x.allocation} / Role : ${x.role}`
                                                                     )
                                                                     .join("\n")}
                                                             >
