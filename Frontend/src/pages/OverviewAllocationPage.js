@@ -35,10 +35,10 @@ function OverviewAllocationPage() {
     const [data, setData] = useState([]);
     const [startWeek, SetStartWeek] = useState(28);
     const [buttonLabel, setButtonLabel] = useState("View History");
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     const totalWeeks = 52;
     const length = totalWeeks - startWeek + 1;
-
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -150,20 +150,17 @@ function OverviewAllocationPage() {
                 </div>
 
                 <div className="card card-body mt-3 pt-3 col">
-                    <div className="table-responsive ">
+                    <div className="table-responsive">
                         <table className="table caption-top table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th
-                                        colSpan={2}
-                                        className="text-center table-light exception"
-                                    >
+                                    <th colSpan={2} scope="row">
                                         Employee
                                     </th>
                                     {Array.from(
                                         { length: length },
                                         (_, index) => (
-                                            <th>
+                                            <th scope="row">
                                                 {`W${(startWeek + index)
                                                     .toString()
                                                     .padStart(2, "0")}`}
@@ -204,11 +201,11 @@ function OverviewAllocationPage() {
                                                     <td>
                                                         {weekData ? (
                                                             <span
-                                                                className="badge bg-success me-1"
+                                                                className="badge bg-success me-1 "
                                                                 title={weekData.allocation_details
                                                                     .map(
                                                                         (x) =>
-                                                                            `${x.customer} - Allocation : ${x.allocation} `
+                                                                            `${x.customer} / Allocation : ${x.allocation} / Role : ${x.role}`
                                                                     )
                                                                     .join("\n")}
                                                             >
