@@ -182,7 +182,7 @@ function OverviewAllocationPage() {
                                         <th
                                             scope="row"
                                             rowSpan={4}
-                                            className="table-light align-middle exception  "
+                                            className="table-light align-middle exception"
                                         >
                                             {emp.emp_name}
                                             <p className="text-muted">
@@ -208,7 +208,7 @@ function OverviewAllocationPage() {
                                                     <td>
                                                         {weekData ? (
                                                             <span
-                                                                className="badge bg-success me-1 "
+                                                                className="badge bg-success me-1"
                                                                 title={weekData.allocation_details
                                                                     .map(
                                                                         (x) =>

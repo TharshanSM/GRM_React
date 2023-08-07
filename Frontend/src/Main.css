@@ -3,7 +3,7 @@ table {
 }
 
 .table > thead {
-    vertical-align: bottom;
+    /* vertical-align: text-top; */
     position: sticky;
     top: 0;
     background-color: #f8f9fa;
