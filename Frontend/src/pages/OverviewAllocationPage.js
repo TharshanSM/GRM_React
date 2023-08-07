@@ -154,9 +154,16 @@ function OverviewAllocationPage() {
                         <table className="table caption-top table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th colSpan={2} scope="row">
+                                    <th
+                                        scope="row"
+                                        className="table-light align-middle exception border border-end-0"
+                                    >
                                         Employee
                                     </th>
+                                    <th
+                                        scope="row"
+                                        className="text-muted second table-light"
+                                    ></th>
                                     {Array.from(
                                         { length: length },
                                         (_, index) => (
@@ -175,7 +182,7 @@ function OverviewAllocationPage() {
                                         <th
                                             scope="row"
                                             rowSpan={4}
-                                            className="table-light align-middle exception"
+                                            className="table-light align-middle exception  "
                                         >
                                             {emp.emp_name}
                                             <p className="text-muted">
