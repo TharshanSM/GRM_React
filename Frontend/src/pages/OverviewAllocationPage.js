@@ -178,7 +178,7 @@ function OverviewAllocationPage() {
                             </thead>
                             {data.map((emp, index) => (
                                 <tbody>
-                                    <tr>
+                                    <tr className="table-light">
                                         <th
                                             scope="row"
                                             rowSpan={4}
@@ -191,7 +191,7 @@ function OverviewAllocationPage() {
                                         </th>
                                         <th
                                             scope="row"
-                                            className="text-muted second table-light"
+                                            className="text-muted second table-light "
                                         >
                                             Sum %
                                         </th>
@@ -228,7 +228,7 @@ function OverviewAllocationPage() {
                                     </tr>
                                     <tr>
                                         <th className="text-muted second table-light">
-                                            Leave / Vacation
+                                            Leave / Vacation / Holiday
                                         </th>
                                         {Array.from(
                                             { length: length },
@@ -242,7 +242,7 @@ function OverviewAllocationPage() {
                                                 return (
                                                     <td>
                                                         {weekData ? (
-                                                            <span className="badge bg-danger ">
+                                                            <span className="badge bg-warning ">
                                                                 {weekData.leave}
                                                             </span>
                                                         ) : (
@@ -253,7 +253,7 @@ function OverviewAllocationPage() {
                                             }
                                         )}
                                     </tr>
-                                    <tr>
+                                    {/* <tr>
                                         <th className="text-muted second table-light">
                                             Public Holiday
                                         </th>
@@ -281,7 +281,7 @@ function OverviewAllocationPage() {
                                                 );
                                             }
                                         )}
-                                    </tr>
+                                    </tr> */}
 
                                     <tr>
                                         <th className="text-muted second table-light">
