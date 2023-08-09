@@ -2,56 +2,9 @@ import React, { useState } from "react";
 import Select from "react-select";
 import axios from "axios";
 
-import AllocationByEmp from "../components/OverviewAllocation/AllocationByEmp";
-import AllocationByProject from "../components/OverviewAllocation/AllocationByProject";
-import AllocationByRegion from "../components/OverviewAllocation/AllocationByRegion";
-
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
-
-const regionOptions = [
-    {
-        value: 1,
-        label: "Sweden",
-    },
-    {
-        value: 2,
-        label: "Finland",
-    },
-    {
-        value: 3,
-        label: "Norway",
-    },
-    {
-        value: 4,
-        label: "Poland",
-    },
-    {
-        value: 5,
-        label: "USA",
-    },
-    {
-        value: 6,
-        label: "Netherlands",
-    },
-    {
-        value: 7,
-        label: "Germany",
-    },
-    {
-        value: 8,
-        label: "Switzerland",
-    },
-    {
-        value: 9,
-        label: "Australia",
-    },
-    {
-        value: 10,
-        label: "Sri Lanka",
-    },
-];
 
 const employeeOptions = [
     { value: 1, label: "John Smith" },
@@ -99,31 +52,12 @@ const weekOptions = [
     { value: 35, label: "Week No 35 / 2023-08-28" },
 ];
 
-const monthOptions = [
-    { value: 1, label: "January" },
-    { value: 2, label: "February" },
-    { value: 3, label: "March" },
-    { value: 4, label: "April" },
-    { value: 5, label: "May" },
-    { value: 6, label: "June" },
-    { value: 7, label: "July" },
-    { value: 8, label: "August" },
-    { value: 9, label: "September" },
-    { value: 10, label: "October" },
-    { value: 11, label: "November" },
-    { value: 12, label: "December" },
-];
-
 function HomePage() {
     const [employees, setEmployees] = useState([]);
     const [project, setProject] = useState(null);
     const [role, setRole] = useState(null);
     const [weeks, setWeeks] = useState([]);
     const [allocation, setAllocation] = useState("");
-
-    const [selectedEmployee, setSelectedEmployee] = useState([]);
-    const [selectedProject, setSelectedProject] = useState([]);
-    const [selectedRegion, setSelectedRegion] = useState([]);
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -208,18 +142,6 @@ function HomePage() {
         setAllocation(event.target.value);
     };
 
-    // Filter Functions
-    const handleEmployeeSelect = (selectedOption) => {
-        setSelectedEmployee(selectedOption);
-    };
-
-    const handleProjectSelect = (selectedOption) => {
-        setSelectedProject(selectedOption);
-    };
-
-    const handleRegionSelect = (selectedOption) => {
-        setSelectedRegion(selectedOption);
-    };
     return (
         <body className={isSidebarOpen ? "toggle-sidebar" : ""}>
             <header
@@ -259,32 +181,6 @@ function HomePage() {
                 <div className="row">
                     <div className="col">
                         <div>
-                            <a
-                                key="Allocate"
-                                className="btn btn-outline-primary me-1"
-                                data-bs-toggle="collapse"
-                                href="#collapseExample"
-                                role="button"
-                                aria-expanded="false"
-                                aria-controls="collapseExample"
-                            >
-                                <i className="bi bi-plus-circle" /> Allocate
-                            </a>
-                            <a
-                                key="Overview Schedule"
-                                className="btn btn-outline-primary me-1"
-                                data-bs-toggle="collapse"
-                                href="#collapseExample1"
-                                role="button"
-                                aria-expanded="false"
-                                aria-controls="collapseExample1"
-                            >
-                                <i className="bi bi-view-stacked" /> Overview
-                                Schedule
-                            </a>
-                        </div>
-
-                        <div className="collapse" id="collapseExample">
                             {errorMessage && (
                                 <div
                                     className=" mt-3 alert alert-danger alert-dismissible fade show"
@@ -414,82 +310,6 @@ function HomePage() {
                                     </div>
                                 </form>
                             </div>
-                        </div>
-
-                        {/* Overview Schedule  */}
-
-                        <div className="collapse" id="collapseExample1">
-                            <div className="d-flex">
-                                <div className="pt-3">
-                                    <Select
-                                        placeholder={
-                                            <span className="bi bi-calendar2-check">
-                                                {"  "}Filter By Month...
-                                            </span>
-                                        }
-                                        options={monthOptions}
-                                        isMulti
-                                    ></Select>
-                                </div>
-
-                                <div className="pt-3 ps-1">
-                                    <Select
-                                        placeholder={
-                                            <span className="bi bi-person-check">
-                                                {"  "}Filter by Employee...
-                                            </span>
-                                        }
-                                        options={employeeOptions}
-                                        isMulti
-                                        onChange={handleEmployeeSelect}
-                                    ></Select>
-                                </div>
-                                <div className="pt-3 ps-1">
-                                    <Select
-                                        placeholder={
-                                            <span className="bi bi-list-task">
-                                                {"  "}Filter by Project...
-                                            </span>
-                                        }
-                                        options={projectOptions}
-                                        onChange={handleProjectSelect}
-                                        isMulti
-                                    ></Select>
-                                </div>
-                                <div className="pt-3 ps-1">
-                                    <Select
-                                        placeholder={
-                                            <span className="bi bi-geo-alt-fill">
-                                                {"  "}Filter by Region...
-                                            </span>
-                                        }
-                                        options={regionOptions}
-                                        onChange={handleRegionSelect}
-                                        isMulti
-                                    ></Select>
-                                </div>
-                            </div>
-
-                            {selectedEmployee.length > 0 &&
-                                selectedEmployee.map((employee) => (
-                                    <AllocationByEmp
-                                        employee={employee}
-                                    ></AllocationByEmp>
-                                ))}
-
-                            {selectedProject.length > 0 &&
-                                selectedProject.map((project) => (
-                                    <AllocationByProject
-                                        project={project}
-                                    ></AllocationByProject>
-                                ))}
-
-                            {selectedRegion.length > 0 &&
-                                selectedRegion.map((region) => (
-                                    <AllocationByRegion
-                                        region={region}
-                                    ></AllocationByRegion>
-                                ))}
                         </div>
                     </div>
                 </div>
