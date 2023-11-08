@@ -33,7 +33,7 @@ const regionOptions = [
 
 function OverviewAllocationPage() {
     const [data, setData] = useState([]);
-    const [startWeek, SetStartWeek] = useState(28);
+    const [startWeek, SetStartWeek] = useState(45);
     const [buttonLabel, setButtonLabel] = useState("View History");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -62,7 +62,7 @@ function OverviewAllocationPage() {
             SetStartWeek(1);
         } else {
             setButtonLabel("View History");
-            SetStartWeek(28);
+            SetStartWeek(45);
         }
     };
 
@@ -319,18 +319,25 @@ function OverviewAllocationPage() {
                 </div>
 
                 <div className="d-flex justify-content-end">
-                    <button
-                        type="button"
-                        className={`btn btn-outline-primary ${
-                            buttonLabel === "View History" ? "" : "active"
-                        }`}
-                        onClick={handleButtonClick}
-                    >
-                        <span className="bi bi-clock-history">
-                            {" "}
-                            {buttonLabel}
-                        </span>
-                    </button>
+                    <div className="pt-3 ps-1">
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                        >
+                            <span className="bi bi-plus-circle"> Allocate</span>
+                        </button>
+                    </div>
+                    <div className="pt-3 ps-1">
+                        <button
+                            type="button"
+                            className={`btn btn-outline-secondary ${
+                                buttonLabel === "View History" ? "" : "active"
+                            }`}
+                            onClick={handleButtonClick}
+                        >
+                            <span className="bi bi-yelp"> {buttonLabel}</span>
+                        </button>
+                    </div>
                 </div>
             </main>
 
