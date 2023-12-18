@@ -33,7 +33,7 @@ const regionOptions = [
 
 function OverviewAllocationPage() {
     const [data, setData] = useState([]);
-    const [startWeek, SetStartWeek] = useState(45);
+    const [startWeek, SetStartWeek] = useState(50);
     const [buttonLabel, setButtonLabel] = useState("View History");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -62,7 +62,7 @@ function OverviewAllocationPage() {
             SetStartWeek(1);
         } else {
             setButtonLabel("View History");
-            SetStartWeek(45);
+            SetStartWeek(50);
         }
     };
 
@@ -317,7 +317,6 @@ function OverviewAllocationPage() {
                         </table>
                     </div>
                 </div>
-
                 <div className="d-flex justify-content-end">
                     <div className="pt-3 ps-1">
                         <button
